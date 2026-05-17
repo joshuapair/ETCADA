@@ -6,934 +6,737 @@
 <title>ETCADA Meeting Minutes</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+:root{--teal:#2B8BAE;--td:#1d6e8a;--tp:#155570;--pale:#e8f4f8;--mid:#b8d8e6;--w:#fff;--off:#f5fafc;--tx:#1a2e36;--mu:#5a7a86;--red:#e63946;--gr:#2a9d8f;--r:14px;--sh:0 2px 12px rgba(43,139,174,.14)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Source Sans 3',sans-serif;background:var(--off);color:var(--tx);min-height:100vh;max-width:430px;margin:0 auto}
 
-:root {
-  --teal: #2B8BAE;
-  --teal-dark: #1d6e8a;
-  --teal-deep: #155570;
-  --teal-pale: #e8f4f8;
-  --teal-mid: #b8d8e6;
-  --white: #ffffff;
-  --off-white: #f5fafc;
-  --text: #1a2e36;
-  --text-muted: #5a7a86;
-  --red: #e63946;
-  --green: #2a9d8f;
-  --radius: 14px;
-  --shadow: 0 2px 12px rgba(43,139,174,0.14);
-}
+header{background:var(--w);border-bottom:3px solid var(--teal);padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(43,139,174,.12)}
+.logo{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:700;color:var(--tx);display:flex;align-items:baseline;gap:9px}
+.logo small{font-family:'Source Sans 3',sans-serif;font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.07em;text-transform:uppercase}
+.nbtn-hdr{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 15px;font-size:13px;font-weight:700;font-family:'Source Sans 3',sans-serif;cursor:pointer}
+.nbtn-hdr:active{background:var(--td)}
 
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+.steps{display:flex;background:var(--tp)}
+.step{flex:1;text-align:center;padding:9px 2px;font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s}
+.step .n{display:block;font-size:17px;line-height:1.1;font-family:'Libre Baskerville',serif}
+.step.active{color:#fff;border-bottom-color:#fff;background:rgba(255,255,255,.1)}
+.step.done{color:rgba(255,255,255,.7)}
 
-body {
-  font-family: 'Source Sans 3', sans-serif;
-  background: var(--off-white);
-  color: var(--text);
-  min-height: 100vh;
-  max-width: 430px;
-  margin: 0 auto;
-}
+.page{display:none;animation:fi .22s ease}
+.page.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
-/* HEADER */
-header {
-  background: var(--white);
-  border-bottom: 3px solid var(--teal);
-  padding: 12px 16px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 10px rgba(43,139,174,0.12);
-}
-.etcada-logo {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.5px;
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-.etcada-logo small {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-.new-btn {
-  background: var(--teal);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: 'Source Sans 3', sans-serif;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.new-btn:active { background: var(--teal-dark); }
+.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);margin:14px 14px 0;overflow:hidden}
+.ch{background:var(--teal);color:#fff;padding:10px 16px;font-weight:700;font-size:11px;letter-spacing:.09em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.cb{padding:14px}
 
-/* PROGRESS */
-.progress-bar { display: flex; background: var(--teal-deep); }
-.prog-step {
-  flex: 1; text-align: center; padding: 9px 2px;
-  font-size: 10px; font-weight: 700;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.06em; text-transform: uppercase;
-  border-bottom: 3px solid transparent;
-  cursor: pointer; transition: all 0.2s;
-}
-.prog-step .snum { display: block; font-size: 17px; line-height: 1.1; font-family: 'Libre Baskerville', serif; }
-.prog-step.active { color: white; border-bottom-color: white; background: rgba(255,255,255,0.1); }
-.prog-step.done { color: rgba(255,255,255,0.7); }
-
-/* PAGES */
-.page { display: none; animation: fadeIn 0.22s ease; }
-.page.active { display: block; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
-
-/* CARD */
-.card {
-  background: var(--white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin: 14px 14px 0;
-  overflow: hidden;
-}
-.card-header {
-  background: var(--teal);
-  color: white;
-  padding: 10px 16px;
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.card-body { padding: 14px; }
-
-/* FORM */
-label {
-  display: block;
-  font-size: 11px; font-weight: 700;
-  color: var(--teal-dark);
-  text-transform: uppercase; letter-spacing: 0.07em;
-  margin-bottom: 5px; margin-top: 12px;
-}
-label:first-child { margin-top: 0; }
-
-/* LOCKED FIELD */
-.locked-field {
-  width: 100%;
-  border: 2px solid var(--teal-mid);
-  border-radius: 9px;
-  padding: 10px 12px;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 15px;
-  color: var(--teal-dark);
-  background: var(--teal-pale);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.lock-icon { font-size: 12px; opacity: 0.6; }
-
-input[type="text"], input[type="date"], textarea {
-  width: 100%;
-  border: 2px solid var(--teal-mid);
-  border-radius: 9px;
-  padding: 10px 12px;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 16px;
-  color: var(--text);
-  background: var(--off-white);
-  outline: none;
-  -webkit-appearance: none;
-  transition: border-color 0.18s;
-}
-input:focus, textarea:focus { border-color: var(--teal); background: white; }
-textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+label{display:block;font-size:11px;font-weight:700;color:var(--td);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;margin-top:12px}
+label:first-child{margin-top:0}
+input[type=text],input[type=date],textarea{width:100%;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;font-family:'Source Sans 3',sans-serif;font-size:16px;color:var(--tx);background:var(--off);outline:none;-webkit-appearance:none;transition:border-color .18s}
+input:focus,textarea:focus{border-color:var(--teal);background:#fff}
+textarea{resize:vertical;line-height:1.5}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.locked{width:100%;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;font-family:'Source Sans 3',sans-serif;font-size:15px;color:var(--td);background:var(--pale);font-weight:600;display:flex;align-items:center;gap:8px}
 
 /* ATTENDEES */
-.attendee-input-row {
-  display: flex; gap: 8px; margin-bottom: 10px;
-}
-.attendee-input-row input { flex: 1; margin: 0; }
-.att-add-btn {
-  background: var(--teal); color: white;
-  border: none; border-radius: 9px;
-  padding: 0 14px; font-size: 20px;
-  cursor: pointer; flex-shrink: 0;
-  transition: background 0.2s;
-}
-.att-add-btn:active { background: var(--teal-dark); }
-.attendee-list { list-style: none; }
-.attendee-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 7px 0; border-bottom: 1px solid var(--teal-pale);
-  font-size: 14px; animation: fadeIn 0.2s ease;
-}
-.attendee-item:last-child { border-bottom: none; }
-.att-name { flex: 1; }
-.att-del {
-  background: none; border: none;
-  color: #ccc; font-size: 16px; cursor: pointer;
-  padding: 2px 4px; transition: color 0.15s;
-}
-.att-del:active { color: var(--red); }
-.att-empty { font-size: 13px; color: var(--text-muted); font-style: italic; padding: 8px 0; }
+.att-row{display:flex;gap:8px;margin-bottom:10px}
+.att-row input{flex:1;margin:0}
+.att-add{background:var(--teal);color:#fff;border:none;border-radius:9px;padding:0 16px;font-size:22px;cursor:pointer;flex-shrink:0}
+.att-add:active{background:var(--td)}
+.att-list{list-style:none}
+.att-item{display:flex;align-items:center;padding:7px 0;border-bottom:1px solid var(--pale);font-size:14px;animation:fi .2s ease}
+.att-item:last-child{border-bottom:none}
+.att-name{flex:1}
+.att-del{background:none;border:none;color:#ccc;font-size:16px;cursor:pointer;padding:2px 6px}
+.att-del:active{color:var(--red)}
+.att-empty{font-size:13px;color:var(--mu);font-style:italic;padding:8px 0}
 
-/* VOICE */
-.voice-card {
-  background: var(--teal-pale);
-  border: 2px dashed var(--teal-mid);
-  border-radius: var(--radius);
-  margin: 14px 14px 0;
-  padding: 18px 14px 14px;
-  text-align: center;
-}
-.voice-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
-.mic-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.mic-btn {
-  width: 74px; height: 74px;
-  border-radius: 50%; border: none;
-  background: var(--teal); color: white;
-  font-size: 32px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 18px rgba(43,139,174,0.4);
-  transition: all 0.2s;
-}
-.mic-btn:active { transform: scale(0.91); }
-.mic-btn.listening {
-  background: var(--red);
-  animation: mic-pulse 1.1s ease-out infinite;
-}
-@keyframes mic-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(230,57,70,0.5); }
-  70%  { box-shadow: 0 0 0 20px rgba(230,57,70,0); }
-  100% { box-shadow: 0 0 0 0 rgba(230,57,70,0); }
-}
-.mic-label { font-size: 12px; font-weight: 700; color: var(--teal-dark); letter-spacing: 0.05em; text-transform: uppercase; }
-.mic-label.recording { color: var(--red); }
+/* MIC SECTION */
+.mic-card{background:var(--pale);border:2px dashed var(--mid);border-radius:var(--r);margin:14px 14px 0;padding:18px 14px;text-align:center}
+.mic-status{font-size:13px;color:var(--mu);margin-bottom:14px;line-height:1.6}
+.mic-status b{color:var(--td)}
+.mic-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:12px}
+.mic-btn{width:76px;height:76px;border-radius:50%;border:none;background:var(--teal);color:#fff;font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(43,139,174,.4);transition:all .2s;position:relative}
+.mic-btn:active{transform:scale(.91)}
+.mic-btn.on{background:var(--red);animation:pulse 1.1s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(230,57,70,.5)}70%{box-shadow:0 0 0 22px rgba(230,57,70,0)}100%{box-shadow:0 0 0 0 rgba(230,57,70,0)}}
+.mic-btn.working{background:#f4a261;pointer-events:none}
+.mic-label{font-size:12px;font-weight:700;color:var(--td);letter-spacing:.05em;text-transform:uppercase}
+.mic-label.rec{color:var(--red)}
+.mic-label.proc{color:#c07020}
 
-.live-box {
-  background: white; border: 2px solid var(--teal-mid);
-  border-radius: 9px; padding: 10px 12px;
-  min-height: 52px; font-size: 14px; color: var(--text-muted);
-  line-height: 1.5; text-align: left; width: 100%;
-  font-style: italic; margin-top: 8px;
-}
-.live-box.has-text { font-style: normal; color: var(--text); }
+/* LIVE TRANSCRIPT */
+.livebox{background:#fff;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;min-height:52px;font-size:14px;color:var(--mu);line-height:1.5;text-align:left;width:100%;font-style:italic}
+.livebox.has{font-style:normal;color:var(--tx)}
 
-.add-voice-btn {
-  width: 100%; background: var(--teal); color: white;
-  border: none; border-radius: 9px; padding: 11px;
-  font-family: 'Source Sans 3', sans-serif; font-size: 14px;
-  font-weight: 700; cursor: pointer; margin-top: 9px;
-  display: none; align-items: center; justify-content: center; gap: 6px;
-}
-.add-voice-btn.show { display: flex; }
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:10px;margin:14px 14px 0;color:var(--mu);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--mid)}
 
-/* POINTS */
-.points-list { list-style: none; }
-.point-item {
-  display: flex; align-items: flex-start; gap: 8px;
-  padding: 9px 0; border-bottom: 1px solid var(--teal-pale);
-  animation: fadeIn 0.2s ease;
-}
-.point-item:last-child { border-bottom: none; }
-.point-num {
-  background: var(--teal); color: white;
-  width: 22px; height: 22px; border-radius: 50%;
-  font-size: 11px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 2px;
-}
-.point-text { flex: 1; font-size: 14px; line-height: 1.45; }
-.point-del { background: none; border: none; color: #ccc; font-size: 18px; cursor: pointer; padding: 0 2px; flex-shrink: 0; }
-.point-del:active { color: var(--red); }
-.empty-msg { text-align: center; padding: 16px 0 6px; font-size: 13px; color: var(--text-muted); font-style: italic; }
+/* KEYBOARD FALLBACK */
+.kb-card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);margin:8px 14px 0;overflow:hidden;border:2px solid var(--mid)}
+.kb-header{background:var(--tp);color:#fff;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.kb-body{padding:14px}
+.kb-instruction{background:var(--pale);border:1px solid var(--mid);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;color:var(--td);line-height:1.6}
+.kb-instruction strong{display:block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;color:var(--tp)}
+.kb-textarea{width:100%;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;font-family:'Source Sans 3',sans-serif;font-size:16px;color:var(--tx);background:var(--off);outline:none;-webkit-appearance:none;transition:border-color .18s;line-height:1.5;min-height:80px;resize:vertical}
+.kb-textarea:focus{border-color:var(--teal);background:#fff}
+.kb-add{width:100%;background:var(--teal);color:#fff;border:none;border-radius:9px;padding:12px;font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:9px;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s}
+.kb-add:active{background:var(--td)}
 
-.type-btn {
-  width: 100%; background: white; color: var(--teal);
-  border: 2px solid var(--teal-mid); border-radius: 9px;
-  padding: 11px; font-family: 'Source Sans 3', sans-serif;
-  font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 9px;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  transition: background 0.15s;
-}
-.type-btn:active { background: var(--teal-pale); }
-
-/* STATUS */
-.status-bar {
-  background: var(--teal-pale); border: 1px solid var(--teal-mid);
-  border-radius: 9px; padding: 9px 12px; font-size: 13px;
-  color: var(--teal-dark); margin: 10px 14px 0;
-  display: none; align-items: center; gap: 8px;
-}
-.status-bar.show { display: flex; }
-.sdot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
-.sdot.spin { background: #f4a261; animation: blink 0.8s ease infinite alternate; }
-.sdot.ok { background: var(--green); }
-.sdot.err { background: var(--red); }
-@keyframes blink { from { opacity:0.3; } to { opacity:1; } }
+/* POINTS LIST */
+.pts{list-style:none}
+.pt{display:flex;align-items:flex-start;gap:8px;padding:9px 0;border-bottom:1px solid var(--pale);animation:fi .2s ease}
+.pt:last-child{border-bottom:none}
+.pnum{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ptxt{flex:1;font-size:14px;line-height:1.45}
+.pdel{background:none;border:none;color:#ccc;font-size:18px;cursor:pointer;padding:0 2px;flex-shrink:0}
+.pdel:active{color:var(--red)}
+.empty-msg{text-align:center;padding:16px 0 6px;font-size:13px;color:var(--mu);font-style:italic}
 
 /* NAV */
-.nav-row { display: flex; gap: 10px; margin: 14px 14px 0; }
-.nav-btn {
-  flex: 1; padding: 13px; border-radius: 10px; border: none;
-  font-family: 'Source Sans 3', sans-serif; font-size: 15px;
-  font-weight: 700; cursor: pointer; transition: all 0.18s;
-}
-.nav-btn.back { background: white; color: var(--teal); border: 2px solid var(--teal-mid); }
-.nav-btn.back:active { background: var(--teal-pale); }
-.nav-btn.next { background: var(--teal); color: white; box-shadow: 0 3px 14px rgba(43,139,174,0.35); }
-.nav-btn.next:active { background: var(--teal-dark); }
-.nav-btn.gen { background: var(--teal-deep); color: white; box-shadow: 0 3px 14px rgba(21,85,112,0.35); }
-.nav-btn.gen:active { opacity: 0.88; }
+.nav{display:flex;gap:10px;margin:14px 14px 0}
+.nb{flex:1;padding:13px;border-radius:10px;border:none;font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .18s}
+.nb.back{background:#fff;color:var(--teal);border:2px solid var(--mid)}
+.nb.back:active{background:var(--pale)}
+.nb.next{background:var(--teal);color:#fff;box-shadow:0 3px 14px rgba(43,139,174,.35)}
+.nb.next:active{background:var(--td)}
+.nb.gen{background:var(--tp);color:#fff;box-shadow:0 3px 14px rgba(21,85,112,.35)}
+.nb.gen:active{opacity:.88}
 
 /* REVIEW */
-.review-body { font-size: 14px; line-height: 1.8; color: var(--text); }
-.review-body b { color: var(--teal-dark); }
+.rev{font-size:14px;line-height:1.8;color:var(--tx)}
+.rev b{color:var(--td)}
 
-/* MINUTES TABLE */
-.preview-box {
-  background: var(--white); border: 2px solid var(--teal-mid);
-  border-radius: var(--radius); margin: 14px 14px 0; overflow: hidden;
-}
-.preview-head {
-  background: var(--teal-deep); color: white; padding: 12px 16px;
-  font-family: 'Libre Baskerville', serif; font-size: 15px;
-  font-weight: 700; text-align: center;
-}
-.preview-head span {
-  display: block; font-family: 'Source Sans 3', sans-serif;
-  font-size: 10px; font-weight: 400; opacity: 0.65;
-  letter-spacing: 0.09em; text-transform: uppercase; margin-top: 3px;
-}
-.preview-body { padding: 12px; }
-.min-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.min-table td { padding: 7px 9px; border: 1px solid var(--teal-mid); vertical-align: top; }
-.min-table .lbl { background: var(--teal); color: white; font-weight: 700; white-space: nowrap; width: 30%; }
-.min-table .sec-row td { background: var(--teal-dark); color: white; font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
-.min-table .disc-lbl { background: var(--teal-pale) !important; color: var(--teal-dark) !important; font-weight: 700; }
-.min-table .next-lbl { background: var(--teal-pale) !important; color: var(--text-muted) !important; }
-.min-table ol { margin: 0; padding-left: 16px; line-height: 1.75; }
+/* STATUS */
+.sbar{background:var(--pale);border:1px solid var(--mid);border-radius:9px;padding:9px 12px;font-size:13px;color:var(--td);margin:10px 14px 0;display:none;align-items:center;gap:8px}
+.sbar.show{display:flex}
+.sdot{width:9px;height:9px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.sdot.spin{background:#f4a261;animation:blink .8s ease infinite alternate}
+.sdot.ok{background:var(--gr)}
+.sdot.err{background:var(--red)}
+@keyframes blink{from{opacity:.3}to{opacity:1}}
 
-/* ACTIONS */
-.action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 14px 0; }
-.act-btn {
-  padding: 12px 8px; border-radius: 10px; border: none;
-  font-family: 'Source Sans 3', sans-serif; font-size: 13px;
-  font-weight: 700; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  transition: all 0.18s;
-}
-.act-btn:active { transform: scale(0.95); opacity: 0.88; }
-.act-btn.copy { background: var(--teal); color: white; }
-.act-btn.print { background: var(--teal-deep); color: white; }
-.act-btn.email { background: white; color: var(--teal); border: 2px solid var(--teal-mid); }
-.act-btn.restart { background: white; color: var(--text-muted); border: 2px solid #ddd; }
+/* GEMINI STATUS */
+.gstatus{border-radius:9px;padding:9px 12px;font-size:12px;margin:10px 14px 0;display:none;align-items:center;gap:8px}
+.gstatus.show{display:flex}
+.gstatus.ok{background:#e8f8f0;border:1px solid #2a9d8f;color:#1a6b5a}
+.gstatus.err{background:#fef0f0;border:1px solid #e63946;color:#a0202a}
 
-/* TOAST */
-.toast {
-  position: fixed; bottom: 28px; left: 50%;
-  transform: translateX(-50%) translateY(70px);
-  background: var(--teal-deep); color: white;
-  padding: 10px 22px; border-radius: 24px;
-  font-size: 14px; font-weight: 600;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.22);
-  transition: transform 0.28s ease; z-index: 999; white-space: nowrap;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
+/* MINUTES */
+.pbox{background:var(--w);border:2px solid var(--mid);border-radius:var(--r);margin:14px 14px 0;overflow:hidden}
+.phead{background:var(--tp);color:#fff;padding:12px 16px;font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;text-align:center}
+.phead span{display:block;font-family:'Source Sans 3',sans-serif;font-size:10px;font-weight:400;opacity:.65;letter-spacing:.09em;text-transform:uppercase;margin-top:3px}
+.pbody{padding:12px}
+.mt{width:100%;border-collapse:collapse;font-size:13px}
+.mt td{padding:7px 9px;border:1px solid #b8d8e6;vertical-align:top}
+.mt .lbl{background:#2B8BAE;color:#fff;font-weight:700;white-space:nowrap;width:30%}
+.mt .sr td{background:#1d6e8a;color:#fff;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.mt .dl{background:#e8f4f8;color:#1d6e8a;font-weight:700}
+.mt .nl{background:#e8f4f8;color:#5a7a86}
+.mt ol{margin:0;padding-left:16px;line-height:1.8}
 
-.spinner {
-  display: inline-block; width: 16px; height: 16px;
-  border: 3px solid rgba(255,255,255,0.3); border-top-color: white;
-  border-radius: 50%; animation: spin 0.7s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 14px 0}
+.abtn{padding:12px 8px;border-radius:10px;border:none;font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .18s}
+.abtn:active{transform:scale(.95);opacity:.88}
+.abtn.cp{background:var(--teal);color:#fff}
+.abtn.pr{background:var(--tp);color:#fff}
+.abtn.em{background:#fff;color:var(--teal);border:2px solid var(--mid)}
+.abtn.rs{background:#fff;color:var(--mu);border:2px solid #ddd}
 
-.note { font-size: 11px; color: var(--text-muted); text-align: center; padding: 8px 14px 0; line-height: 1.5; }
-.pad { height: 30px; }
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--tp);color:#fff;padding:10px 22px;border-radius:24px;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.22);transition:transform .28s ease;z-index:999;white-space:nowrap;max-width:88vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.spin{display:inline-block;width:15px;height:15px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+.note{font-size:11px;color:var(--mu);text-align:center;padding:8px 14px 0;line-height:1.5}
+.pad{height:32px}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="etcada-logo">ETCADA <small>Minutes</small></div>
-  <button class="new-btn" onclick="newMeeting()">+ New Meeting</button>
+  <div class="logo">ETCADA <small>Minutes</small></div>
+  <button class="nbtn-hdr" onclick="newMeeting()">+ New Meeting</button>
 </header>
 
-<div class="progress-bar">
-  <div class="prog-step active" id="tab1" onclick="goToStep(1)"><span class="snum">1</span>Info</div>
-  <div class="prog-step" id="tab2" onclick="goToStep(2)"><span class="snum">2</span>Notes</div>
-  <div class="prog-step" id="tab3" onclick="goToStep(3)"><span class="snum">3</span>Review</div>
-  <div class="prog-step" id="tab4" onclick="goToStep(4)"><span class="snum">4</span>Minutes</div>
+<div class="steps">
+  <div class="step active" id="t1" onclick="goToStep(1)"><span class="n">1</span>Info</div>
+  <div class="step" id="t2" onclick="goToStep(2)"><span class="n">2</span>Notes</div>
+  <div class="step" id="t3" onclick="goToStep(3)"><span class="n">3</span>Review</div>
+  <div class="step" id="t4" onclick="goToStep(4)"><span class="n">4</span>Minutes</div>
 </div>
 
-<!-- ══════════════ STEP 1: INFO ══════════════ -->
-<div class="page active" id="page1">
+<!-- ══ STEP 1: INFO ══ -->
+<div class="page active" id="p1">
   <div class="card">
-    <div class="card-header">📋 Meeting Details</div>
-    <div class="card-body">
-
+    <div class="ch">📋 Meeting Details</div>
+    <div class="cb">
       <label>Facilitator</label>
-      <div class="locked-field"><span class="lock-icon">🔒</span> Brett Foster, RSPS, PSS</div>
-
+      <div class="locked">🔒 Brett Foster, RSPS, PSS</div>
       <label>Location</label>
-      <div class="locked-field"><span class="lock-icon">🔒</span> ETCADA</div>
-
+      <div class="locked">🔒 ETCADA</div>
       <label>Date</label>
       <input type="date" id="meetDate">
-
-      <div class="row2">
+      <div class="r2">
         <div><label>Start Time</label><input type="text" id="startTime" placeholder="8:00am"></div>
         <div><label>End Time</label><input type="text" id="endTime" placeholder="9:00am"></div>
       </div>
-
     </div>
   </div>
 
-  <!-- ATTENDEES -->
   <div class="card">
-    <div class="card-header">👥 Attendees <span style="opacity:0.7;font-weight:400;font-size:10px;margin-left:4px">(saved automatically)</span></div>
-    <div class="card-body">
-      <div class="attendee-input-row">
-        <input type="text" id="attInput" placeholder="Type name and tap +" onkeydown="if(event.key==='Enter')addAttendee()">
-        <button class="att-add-btn" onclick="addAttendee()">+</button>
+    <div class="ch">👥 Attendees <span style="opacity:.7;font-weight:400;font-size:10px;margin-left:4px">(saved — stay until deleted)</span></div>
+    <div class="cb">
+      <div class="att-row">
+        <input type="text" id="attInput" placeholder="Type name, tap +" onkeydown="if(event.key==='Enter')addAtt()">
+        <button class="att-add" onclick="addAtt()">+</button>
       </div>
-      <ul class="attendee-list" id="attendeeList">
-        <li class="att-empty">No attendees added yet.</li>
-      </ul>
+      <ul class="att-list" id="attList"><li class="att-empty">No attendees yet.</li></ul>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-header">📅 Next Meeting</div>
-    <div class="card-body">
+    <div class="ch">📅 Next Meeting</div>
+    <div class="cb">
       <label>Date of Next Meeting</label>
-      <input type="date" id="nextMeeting">
+      <input type="date" id="nextDate">
     </div>
   </div>
 
-  <div class="nav-row">
-    <button class="nav-btn next" onclick="goToStep(2)">Next: Add Notes →</button>
+  <div class="gstatus" id="gstatus"></div>
+
+  <div class="nav">
+    <button class="nb next" onclick="goToStep(2)">Next: Add Notes →</button>
   </div>
   <div class="pad"></div>
 </div>
 
-<!-- ══════════════ STEP 2: NOTES ══════════════ -->
-<div class="page" id="page2">
-  <div class="voice-card">
-    <p class="voice-hint">Tap the mic, speak one discussion point, tap <b>Add This Point</b>. Repeat for each item.</p>
+<!-- ══ STEP 2: NOTES ══ -->
+<div class="page" id="p2">
+
+  <!-- MIC OPTION -->
+  <div class="mic-card">
+    <div class="mic-status" id="micStatus">
+      <b>Option 1 — Mic Button</b><br>
+      Tap mic, speak all your notes at once, tap stop.<br>Gemini automatically cleans and splits them.
+    </div>
     <div class="mic-wrap">
       <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
       <div class="mic-label" id="micLabel">Tap to Record</div>
     </div>
-    <div class="live-box" id="liveBox">Tap mic to start...</div>
-    <button class="add-voice-btn" id="addVoiceBtn" onclick="addVoicePoint()">✚ Add This Point</button>
+    <div class="livebox" id="livebox">Your speech will appear here as you talk...</div>
   </div>
 
-  <div class="card">
-    <div class="card-header">✏️ Or Type a Point</div>
-    <div class="card-body">
-      <textarea id="manualPoint" placeholder="Type a discussion point..." rows="3"></textarea>
-      <button class="type-btn" onclick="addManualPoint()">✚ Add Typed Point</button>
+  <div class="divider">or type / use keyboard mic</div>
+
+  <!-- KEYBOARD FALLBACK -->
+  <div class="kb-card">
+    <div class="kb-header">⌨️ Option 2 — Keyboard Input</div>
+    <div class="kb-body">
+      <div class="kb-instruction">
+        <strong>📱 iPhone / Android tip</strong>
+        Tap the text box below — your keyboard opens.<br>
+        Look for the <b>🎤 microphone key</b> on your keyboard (bottom row) and tap it to dictate hands-free. Tap it again to stop. Then tap <b>Add &amp; Clean Up</b>.
+      </div>
+      <textarea class="kb-textarea" id="manualPt" placeholder="Tap here to type — or use the 🎤 key on your keyboard to speak. You can type multiple points at once and Gemini will split them." rows="4"></textarea>
+      <button class="kb-add" onclick="addManual()">✚ Add &amp; Clean Up with Gemini</button>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-header">📝 Discussion Points &nbsp;<span id="pointCount" style="opacity:0.75;font-weight:400">0</span></div>
-    <div class="card-body">
-      <ul class="points-list" id="pointsList">
-        <li class="empty-msg">No points added yet.</li>
-      </ul>
+    <div class="ch">📝 Discussion Points <span id="ptCount" style="opacity:.75;font-weight:400">0</span></div>
+    <div class="cb">
+      <ul class="pts" id="ptList"><li class="empty-msg">No points yet. Use the mic or keyboard above.</li></ul>
     </div>
   </div>
 
-  <div class="nav-row">
-    <button class="nav-btn back" onclick="goToStep(1)">← Back</button>
-    <button class="nav-btn next" onclick="goToStep(3)">Review →</button>
+  <div class="nav">
+    <button class="nb back" onclick="goToStep(1)">← Back</button>
+    <button class="nb next" onclick="goToStep(3)">Review →</button>
   </div>
   <div class="pad"></div>
 </div>
 
-<!-- ══════════════ STEP 3: REVIEW ══════════════ -->
-<div class="page" id="page3">
+<!-- ══ STEP 3: REVIEW ══ -->
+<div class="page" id="p3">
   <div class="card">
-    <div class="card-header">👁 Review Before Generating</div>
-    <div class="card-body review-body" id="reviewBody"></div>
+    <div class="ch">👁 Review</div>
+    <div class="cb rev" id="revBody"></div>
   </div>
   <div class="card">
-    <div class="card-header">✨ AI Polish with Gemini</div>
-    <div class="card-body">
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px;line-height:1.5">Gemini will clean up your voice notes into professional discussion points.</p>
+    <div class="ch">✨ Final Polish with Gemini</div>
+    <div class="cb">
+      <p style="font-size:13px;color:var(--mu);margin-bottom:10px;line-height:1.5">Gemini does one final professional cleanup before formatting your minutes.</p>
       <label>Extra Instructions (optional)</label>
-      <textarea id="aiInstr" placeholder="e.g. Keep it brief. Note any action items." rows="2"></textarea>
+      <textarea id="aiInstr" placeholder="e.g. Note action items. Keep it concise." style="min-height:56px"></textarea>
     </div>
   </div>
-
-  <div class="status-bar" id="statusBar">
-    <div class="sdot" id="sdot"></div>
-    <span id="statusTxt">Processing...</span>
-  </div>
-
-  <div class="nav-row">
-    <button class="nav-btn back" onclick="goToStep(2)">← Back</button>
-    <button class="nav-btn gen" id="genBtn" onclick="generateMinutes()">✨ Generate Minutes</button>
+  <div class="sbar" id="sbar"><div class="sdot" id="sdot"></div><span id="stxt"></span></div>
+  <div class="nav">
+    <button class="nb back" onclick="goToStep(2)">← Back</button>
+    <button class="nb gen" id="genBtn" onclick="generate()">✨ Generate Minutes</button>
   </div>
   <div class="pad"></div>
 </div>
 
-<!-- ══════════════ STEP 4: MINUTES ══════════════ -->
-<div class="page" id="page4">
-  <div class="preview-box">
-    <div class="preview-head">RSS/CCMS Weekly Meeting Minutes<span>ETCADA — Part of the Solution</span></div>
-    <div class="preview-body">
-      <table class="min-table" id="minTable"></table>
-    </div>
+<!-- ══ STEP 4: MINUTES ══ -->
+<div class="page" id="p4">
+  <div class="pbox">
+    <div class="phead">RSS/CCMS Weekly Meeting Minutes<span>ETCADA — Part of the Solution</span></div>
+    <div class="pbody"><table class="mt" id="mt"></table></div>
   </div>
-  <div class="action-grid">
-    <button class="act-btn copy" onclick="copyMinutes()">📋 Copy</button>
-    <button class="act-btn print" onclick="printMinutes()">🖨️ Print / PDF</button>
-    <button class="act-btn email" onclick="emailMinutes()">✉️ Email</button>
-    <button class="act-btn restart" onclick="newMeeting()">↺ New Meeting</button>
+  <div class="acts">
+    <button class="abtn cp" onclick="copyMins()">📋 Copy</button>
+    <button class="abtn pr" onclick="printMins()">🖨️ Print/PDF</button>
+    <button class="abtn em" onclick="emailMins()">✉️ Email</button>
+    <button class="abtn rs" onclick="newMeeting()">↺ New Meeting</button>
   </div>
-  <p class="note">Print / PDF to save a file or share from your phone.</p>
+  <p class="note">Print/PDF → save as file or share from your phone.</p>
   <div class="pad"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONSTANTS ─────────────────────────────────────────────────────────────────
-const FACILITATOR = 'Brett Foster, RSPS, PSS';
-const LOCATION    = 'ETCADA';
-const GEMINI_KEY  = 'AIzaSyAuW4rZflM_fXSHCIY1t_STZRhXNp7G-IA';
-const GEMINI_URL  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+const FAC  = 'Brett Foster, RSPS, PSS';
+const LOC  = 'ETCADA';
+const GKEY = 'AIzaSyAuW4rZflM_fXSHCIY1t_STZRhXNp7G-IA';
+const GURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GKEY}`;
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let points = [];
+let points    = [];
 let attendees = [];
-let recognition = null;
-let isListening = false;
-let currentTranscript = '';
-let plainText = '';
+let recog     = null;
+let listening = false;
+let transcript = '';
+let plain = '';
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  // Set today's date
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('meetDate').value = today;
-  // Next week default
-  const next = new Date();
-  next.setDate(next.getDate() + 7);
-  document.getElementById('nextMeeting').value = next.toISOString().split('T')[0];
-  // Load saved attendees
-  loadAttendees();
-  // Init speech
+  const nxt = new Date(); nxt.setDate(nxt.getDate() + 7);
+  document.getElementById('nextDate').value = nxt.toISOString().split('T')[0];
+  loadAtts();
   initSpeech();
+  testGemini();
 });
+
+// ── GEMINI CONNECTION TEST ────────────────────────────────────────────────────
+async function testGemini() {
+  const el = document.getElementById('gstatus');
+  try {
+    const r = await fetch(GURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: 'Reply with one word: ready' }] }],
+        generationConfig: { maxOutputTokens: 5 }
+      })
+    });
+    const d = await r.json();
+    const txt = d.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (txt) {
+      el.textContent = '✅ Gemini is connected and ready';
+      el.className = 'gstatus show ok';
+    } else {
+      el.textContent = '⚠️ Gemini connected but returned no text — check your API key at aistudio.google.com';
+      el.className = 'gstatus show err';
+    }
+  } catch(e) {
+    el.textContent = '❌ Cannot reach Gemini: ' + e.message;
+    el.className = 'gstatus show err';
+  }
+}
+
+// ── GEMINI CALL ───────────────────────────────────────────────────────────────
+async function callGemini(rawText) {
+  const prompt = `You are helping format staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas.
+
+The text below is either a voice transcript or typed notes from a staff meeting. Do the following:
+1. Split it into individual discussion points (one topic per point)
+2. Clean up each point into a clear, professional, concise sentence
+3. Remove filler words like "um", "you know", "like", "so", etc.
+4. Do NOT add, invent, or assume anything not in the original text
+5. Return ONLY a numbered list. No intro text. No markdown symbols. One point per line.
+
+Text:
+"${rawText}"`;
+
+  const r = await fetch(GURL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { maxOutputTokens: 1000, temperature: 0.2 }
+    })
+  });
+  const d = await r.json();
+  const out = d.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!out) throw new Error(d.error?.message || 'No response from Gemini');
+  return out.trim().split('\n')
+    .map(l => l.replace(/^\d+[\.\)]\s*/, '').replace(/^[-•*]+\s*/, '').trim())
+    .filter(l => l.length > 2);
+}
 
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
 function goToStep(n) {
-  document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i + 1 === n));
-  document.querySelectorAll('.prog-step').forEach((t, i) => {
-    t.classList.toggle('active', i + 1 === n);
-    t.classList.toggle('done', i + 1 < n);
+  document.querySelectorAll('.page').forEach((p,i) => p.classList.toggle('active', i+1===n));
+  document.querySelectorAll('.step').forEach((t,i) => {
+    t.classList.toggle('active', i+1===n);
+    t.classList.toggle('done', i+1<n);
   });
   if (n === 3) buildReview();
   window.scrollTo(0, 0);
 }
 
-// ── NEW MEETING — only clears meeting-specific data, keeps attendees ───────────
+// ── NEW MEETING ───────────────────────────────────────────────────────────────
 function newMeeting() {
-  points = [];
-  currentTranscript = '';
-  plainText = '';
-  renderPoints();
-
-  // Reset date fields to today / next week
+  points = []; transcript = ''; plain = '';
+  renderPts();
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('meetDate').value = today;
-  const next = new Date();
-  next.setDate(next.getDate() + 7);
-  document.getElementById('nextMeeting').value = next.toISOString().split('T')[0];
-  document.getElementById('startTime').value = '';
-  document.getElementById('endTime').value = '';
-  document.getElementById('manualPoint').value = '';
-  document.getElementById('aiInstr').value = '';
-  document.getElementById('liveBox').textContent = 'Tap mic to start...';
-  document.getElementById('liveBox').className = 'live-box';
-  document.getElementById('addVoiceBtn').classList.remove('show');
-  document.getElementById('statusBar').classList.remove('show');
-
-  if (isListening) stopListening();
+  const nxt = new Date(); nxt.setDate(nxt.getDate()+7);
+  document.getElementById('nextDate').value = nxt.toISOString().split('T')[0];
+  ['startTime','endTime','manualPt','aiInstr'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('livebox').textContent = 'Your speech will appear here as you talk...';
+  document.getElementById('livebox').className = 'livebox';
+  document.getElementById('sbar').classList.remove('show');
+  if (listening) stopMic();
   goToStep(1);
   showToast('Ready for new meeting ✓');
 }
 
-// ── ATTENDEES (persistent via localStorage) ────────────────────────────────────
-function loadAttendees() {
-  try {
-    const saved = localStorage.getItem('etcada_attendees');
-    attendees = saved ? JSON.parse(saved) : [];
-  } catch(e) {
-    attendees = [];
-  }
-  renderAttendees();
+// ── ATTENDEES ─────────────────────────────────────────────────────────────────
+function loadAtts() {
+  try { attendees = JSON.parse(localStorage.getItem('etcada_atts') || '[]'); } catch(e) { attendees = []; }
+  renderAtts();
 }
-
-function saveAttendees() {
-  try {
-    localStorage.setItem('etcada_attendees', JSON.stringify(attendees));
-  } catch(e) {}
+function saveAtts() {
+  try { localStorage.setItem('etcada_atts', JSON.stringify(attendees)); } catch(e) {}
 }
-
-function addAttendee() {
+function addAtt() {
   const inp = document.getElementById('attInput');
   const name = inp.value.trim();
   if (!name) return;
-  if (attendees.includes(name)) {
-    showToast('Already in list');
-    inp.value = '';
-    return;
-  }
-  attendees.push(name);
-  saveAttendees();
-  renderAttendees();
-  inp.value = '';
+  if (attendees.includes(name)) { showToast('Already in list'); inp.value=''; return; }
+  attendees.push(name); saveAtts(); renderAtts(); inp.value='';
   showToast(name + ' added ✓');
 }
-
-function deleteAttendee(i) {
+function delAtt(i) {
   const name = attendees[i];
-  attendees.splice(i, 1);
-  saveAttendees();
-  renderAttendees();
+  attendees.splice(i,1); saveAtts(); renderAtts();
   showToast(name + ' removed');
 }
-
-function renderAttendees() {
-  const list = document.getElementById('attendeeList');
-  if (!attendees.length) {
-    list.innerHTML = '<li class="att-empty">No attendees added yet.</li>';
-    return;
-  }
-  list.innerHTML = attendees.map((a, i) => `
-    <li class="attendee-item">
+function renderAtts() {
+  const l = document.getElementById('attList');
+  if (!attendees.length) { l.innerHTML='<li class="att-empty">No attendees yet.</li>'; return; }
+  l.innerHTML = attendees.map((a,i) => `
+    <li class="att-item">
       <span class="att-name">${esc(a)}</span>
-      <button class="att-del" onclick="deleteAttendee(${i})">✕</button>
+      <button class="att-del" onclick="delAtt(${i})">✕</button>
     </li>`).join('');
 }
 
 // ── SPEECH RECOGNITION ────────────────────────────────────────────────────────
 function initSpeech() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('micBtn');
+  const lbl = document.getElementById('micLabel');
+  const status = document.getElementById('micStatus');
   if (!SR) {
-    document.getElementById('micBtn').style.opacity = '0.4';
-    document.getElementById('micLabel').textContent = 'Voice: use Chrome';
+    btn.style.opacity = '.35';
+    btn.style.pointerEvents = 'none';
+    lbl.textContent = 'Not available on this browser';
+    status.innerHTML = '<b>Option 1 — Mic Button</b><br>Voice recording is not available on your current browser. Please use <b>Option 2</b> below with your keyboard mic 🎤';
     return;
   }
-  recognition = new SR();
-  recognition.continuous = true;
-  recognition.interimResults = true;
-  recognition.lang = 'en-US';
-
-  recognition.onresult = e => {
-    let interim = '', final = '';
-    for (let i = e.resultIndex; i < e.results.length; i++) {
+  recog = new SR();
+  recog.continuous = true;
+  recog.interimResults = true;
+  recog.lang = 'en-US';
+  recog.onresult = e => {
+    let interim='', final='';
+    for (let i=e.resultIndex; i<e.results.length; i++) {
       const t = e.results[i][0].transcript;
-      e.results[i].isFinal ? final += t : interim += t;
+      e.results[i].isFinal ? final+=t : interim+=t;
     }
-    if (final) currentTranscript += ' ' + final;
-    const display = (currentTranscript + interim).trim();
-    const box = document.getElementById('liveBox');
-    box.textContent = display || 'Listening...';
-    box.className = 'live-box' + (display ? ' has-text' : '');
-    document.getElementById('addVoiceBtn').classList.toggle('show', !!display);
+    if (final) transcript += ' ' + final;
+    const disp = (transcript + interim).trim();
+    const box = document.getElementById('livebox');
+    box.textContent = disp || 'Listening...';
+    box.className = 'livebox' + (disp ? ' has' : '');
   };
-
-  recognition.onerror = e => {
-    if (e.error !== 'aborted') { stopListening(); showToast('Mic error: ' + e.error); }
+  recog.onerror = e => {
+    if (e.error === 'not-allowed') {
+      showToast('Mic blocked — allow mic in browser settings');
+      stopMic();
+    } else if (e.error !== 'aborted') {
+      showToast('Mic error: ' + e.error);
+      stopMic();
+    }
   };
-  recognition.onend = () => {
-    if (isListening) try { recognition.start(); } catch(e) {}
-  };
+  recog.onend = () => { if (listening) try { recog.start(); } catch(e) {} };
 }
 
 function toggleMic() {
-  if (!recognition) { showToast('Use Chrome for voice input'); return; }
-  isListening ? stopListening() : startListening();
+  if (!recog) { showToast('Use keyboard 🎤 mic in Option 2 below'); return; }
+  listening ? stopAndProcess() : startMic();
 }
 
-function startListening() {
-  currentTranscript = '';
-  document.getElementById('liveBox').textContent = 'Listening...';
-  document.getElementById('liveBox').className = 'live-box';
-  document.getElementById('addVoiceBtn').classList.remove('show');
-  isListening = true;
-  document.getElementById('micBtn').classList.add('listening');
-  document.getElementById('micBtn').textContent = '⏹';
-  document.getElementById('micLabel').textContent = 'Recording — Tap to Stop';
-  document.getElementById('micLabel').className = 'mic-label recording';
-  try { recognition.start(); } catch(e) {}
+function startMic() {
+  transcript = '';
+  document.getElementById('livebox').textContent = 'Listening... speak all your notes now.';
+  document.getElementById('livebox').className = 'livebox';
+  listening = true;
+  const btn = document.getElementById('micBtn');
+  const lbl = document.getElementById('micLabel');
+  btn.classList.add('on');
+  btn.textContent = '⏹';
+  lbl.textContent = 'Recording — Tap to Stop & Process';
+  lbl.className = 'mic-label rec';
+  try { recog.start(); } catch(e) {}
 }
 
-function stopListening() {
-  isListening = false;
-  try { recognition.stop(); } catch(e) {}
-  document.getElementById('micBtn').classList.remove('listening');
-  document.getElementById('micBtn').textContent = '🎤';
-  document.getElementById('micLabel').textContent = 'Tap to Record';
-  document.getElementById('micLabel').className = 'mic-label';
-  if (currentTranscript.trim()) document.getElementById('addVoiceBtn').classList.add('show');
-}
+// ── STOP MIC → AUTO SEND TO GEMINI ───────────────────────────────────────────
+async function stopAndProcess() {
+  listening = false;
+  try { recog.stop(); } catch(e) {}
 
-function addVoicePoint() {
-  const t = currentTranscript.trim();
-  if (!t) return;
-  addPoint(t);
-  currentTranscript = '';
-  document.getElementById('liveBox').textContent = 'Tap mic to start...';
-  document.getElementById('liveBox').className = 'live-box';
-  document.getElementById('addVoiceBtn').classList.remove('show');
-  showToast('Point added ✓');
-}
+  const raw = transcript.trim();
+  const btn = document.getElementById('micBtn');
+  const lbl = document.getElementById('micLabel');
 
-function addManualPoint() {
-  const ta = document.getElementById('manualPoint');
-  const t = ta.value.trim();
-  if (!t) return;
-  addPoint(t);
-  ta.value = '';
-  showToast('Point added ✓');
-}
+  btn.classList.remove('on');
+  btn.textContent = '🎤';
 
-function addPoint(text) {
-  points.push(text);
-  renderPoints();
-}
-
-function deletePoint(i) {
-  points.splice(i, 1);
-  renderPoints();
-}
-
-function renderPoints() {
-  document.getElementById('pointCount').textContent = points.length;
-  const list = document.getElementById('pointsList');
-  if (!points.length) {
-    list.innerHTML = '<li class="empty-msg">No points added yet.</li>';
+  if (!raw) {
+    lbl.textContent = 'Tap to Record';
+    lbl.className = 'mic-label';
+    showToast('Nothing recorded — try again');
     return;
   }
-  list.innerHTML = points.map((p, i) => `
-    <li class="point-item">
-      <span class="point-num">${i + 1}</span>
-      <span class="point-text">${esc(p)}</span>
-      <button class="point-del" onclick="deletePoint(${i})">✕</button>
+
+  // Show processing state
+  btn.classList.add('working');
+  btn.textContent = '⏳';
+  lbl.textContent = 'Gemini cleaning up your notes...';
+  lbl.className = 'mic-label proc';
+
+  try {
+    const cleaned = await callGemini(raw);
+    if (cleaned.length > 0) {
+      cleaned.forEach(p => points.push(p));
+      renderPts();
+      showToast(`✓ ${cleaned.length} point${cleaned.length>1?'s':''} added and cleaned`);
+    } else {
+      points.push(raw);
+      renderPts();
+      showToast('Added as-is (Gemini returned empty)');
+    }
+  } catch(e) {
+    // Gemini failed — add raw text as fallback, show error
+    points.push(raw);
+    renderPts();
+    showToast('Gemini error — added raw. Check connection.');
+    console.error('Gemini error:', e);
+  }
+
+  transcript = '';
+  document.getElementById('livebox').textContent = 'Your speech will appear here as you talk...';
+  document.getElementById('livebox').className = 'livebox';
+  btn.classList.remove('working');
+  btn.textContent = '🎤';
+  lbl.textContent = 'Tap to Record Again';
+  lbl.className = 'mic-label';
+}
+
+function stopMic() {
+  listening = false;
+  try { recog.stop(); } catch(e) {}
+  const btn = document.getElementById('micBtn');
+  const lbl = document.getElementById('micLabel');
+  btn.classList.remove('on','working');
+  btn.textContent = '🎤';
+  lbl.textContent = 'Tap to Record';
+  lbl.className = 'mic-label';
+}
+
+// ── MANUAL / KEYBOARD INPUT → AUTO GEMINI ────────────────────────────────────
+async function addManual() {
+  const ta = document.getElementById('manualPt');
+  const raw = ta.value.trim();
+  if (!raw) return;
+
+  const btn = document.querySelector('.kb-add');
+  btn.innerHTML = '<span class="spin"></span> Gemini cleaning up...';
+  btn.style.pointerEvents = 'none';
+
+  try {
+    const cleaned = await callGemini(raw);
+    if (cleaned.length > 0) {
+      cleaned.forEach(p => points.push(p));
+      renderPts();
+      showToast(`✓ ${cleaned.length} point${cleaned.length>1?'s':''} added and cleaned`);
+    } else {
+      points.push(raw);
+      renderPts();
+      showToast('Added (Gemini returned empty)');
+    }
+  } catch(e) {
+    points.push(raw);
+    renderPts();
+    showToast('Gemini error — added raw. Check connection.');
+    console.error(e);
+  }
+
+  ta.value = '';
+  btn.innerHTML = '✚ Add &amp; Clean Up with Gemini';
+  btn.style.pointerEvents = '';
+}
+
+// ── POINTS ────────────────────────────────────────────────────────────────────
+function delPt(i) { points.splice(i,1); renderPts(); }
+function renderPts() {
+  document.getElementById('ptCount').textContent = points.length;
+  const l = document.getElementById('ptList');
+  if (!points.length) { l.innerHTML='<li class="empty-msg">No points yet. Use the mic or keyboard above.</li>'; return; }
+  l.innerHTML = points.map((p,i) => `
+    <li class="pt">
+      <span class="pnum">${i+1}</span>
+      <span class="ptxt">${esc(p)}</span>
+      <button class="pdel" onclick="delPt(${i})">✕</button>
     </li>`).join('');
 }
 
 // ── REVIEW ────────────────────────────────────────────────────────────────────
 function buildReview() {
   const d = getData();
-  document.getElementById('reviewBody').innerHTML = `
+  document.getElementById('revBody').innerHTML = `
     <b>Date:</b> ${fmt(d.date)}<br>
-    <b>Time:</b> ${d.start || '—'}${d.end ? ' – ' + d.end : ''}<br>
-    <b>Location:</b> ${LOCATION}<br>
-    <b>Facilitator:</b> ${FACILITATOR}<br>
+    <b>Time:</b> ${d.start||'—'}${d.end?' – '+d.end:''}<br>
+    <b>Location:</b> ${LOC}<br>
+    <b>Facilitator:</b> ${FAC}<br>
     <b>Attendees:</b> ${attendees.length ? esc(attendees.join(', ')) : '—'}<br>
     <b>Next Meeting:</b> ${fmt(d.nextDate)}<br><br>
-    <b>${points.length} Discussion Point${points.length !== 1 ? 's' : ''}:</b><br>
-    ${points.map((p, i) => `${i + 1}. ${esc(p)}`).join('<br>')}`;
+    <b>${points.length} Discussion Point${points.length!==1?'s':''}:</b><br>
+    ${points.map((p,i)=>`${i+1}. ${esc(p)}`).join('<br>')}`;
 }
 
-// ── GENERATE WITH GEMINI ──────────────────────────────────────────────────────
-async function generateMinutes() {
+// ── FINAL GENERATE ────────────────────────────────────────────────────────────
+async function generate() {
   if (!points.length) { showToast('Add at least one discussion point'); return; }
-
   const btn = document.getElementById('genBtn');
-  const sb  = document.getElementById('statusBar');
+  const sb  = document.getElementById('sbar');
   const dot = document.getElementById('sdot');
-  const stxt = document.getElementById('statusTxt');
-
-  btn.innerHTML = '<span class="spinner"></span> Generating...';
+  const stxt = document.getElementById('stxt');
+  btn.innerHTML = '<span class="spin"></span> Generating...';
   btn.disabled = true;
   sb.classList.add('show');
   dot.className = 'sdot spin';
-  stxt.textContent = 'Gemini is polishing your notes...';
+  stxt.textContent = 'Gemini doing final polish...';
 
   const extra = document.getElementById('aiInstr').value.trim();
-  const prompt = `You are formatting staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas. Rewrite these raw discussion points into clear, professional, concise sentences. Keep all content accurate — do not add or invent anything. Return ONLY a numbered list, nothing else.\n${extra ? 'Additional instructions: ' + extra + '\n' : ''}Raw notes:\n${points.map((p, i) => `${i + 1}. ${p}`).join('\n')}`;
+  const finalPrompt = `You are finalizing staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas. Do a final professional cleanup of these points. Make each one clear, concise, and professional. Do NOT add anything not already present. Return ONLY a numbered list, no markdown.${extra ? '\n\nExtra: ' + extra : ''}
 
-  let cleaned = points;
+Points:
+${points.map((p,i)=>`${i+1}. ${p}`).join('\n')}`;
+
+  let final = points;
   try {
-    const res = await fetch(GEMINI_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { maxOutputTokens: 1000, temperature: 0.3 }
-      })
-    });
-    const data = await res.json();
-    const geminiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (geminiText) {
-      const lines = geminiText.trim().split('\n')
-        .filter(l => l.trim())
-        .map(l => l.replace(/^\d+[\.\)]\s*/, '').replace(/^\*+\s*/, '').trim())
-        .filter(l => l.length > 0);
-      if (lines.length > 0) {
-        cleaned = lines;
-        dot.className = 'sdot ok';
-        stxt.textContent = '✓ Gemini polish applied';
-      } else {
-        dot.className = 'sdot err';
-        stxt.textContent = 'Using your notes as-is';
-      }
+    const cleaned = await callGemini(finalPrompt);
+    if (cleaned.length > 0) {
+      final = cleaned;
+      dot.className = 'sdot ok';
+      stxt.textContent = '✓ Gemini final polish applied';
     } else {
       dot.className = 'sdot err';
-      stxt.textContent = 'Gemini error — using your notes as-is';
-      console.error('Gemini response:', JSON.stringify(data));
+      stxt.textContent = 'Using existing points (Gemini returned empty)';
     }
   } catch(e) {
     dot.className = 'sdot err';
-    stxt.textContent = 'Network error — using your notes as-is';
+    stxt.textContent = 'Gemini error — using current points';
     console.error(e);
   }
 
-  buildTable(getData(), cleaned);
+  buildTable(getData(), final);
   btn.innerHTML = '✨ Generate Minutes';
   btn.disabled = false;
   goToStep(4);
 }
 
-// ── BUILD MINUTES TABLE ───────────────────────────────────────────────────────
+// ── TABLE ─────────────────────────────────────────────────────────────────────
 function buildTable(d, pts) {
-  const attText = attendees.length ? attendees.join(', ') : '—';
-  const rows = pts.map(p => `<li>${esc(p)}</li>`).join('');
-
-  document.getElementById('minTable').innerHTML = `
-    <tr class="sec-row"><td colspan="2">RSS Staff Meeting</td></tr>
+  const atts = attendees.length ? attendees.join(', ') : '—';
+  document.getElementById('mt').innerHTML = `
+    <tr class="sr"><td colspan="2">RSS Staff Meeting</td></tr>
     <tr><td class="lbl">Date</td><td>${fmt(d.date)}</td></tr>
-    <tr><td class="lbl">Time</td><td>${d.start || ''}${d.end ? ' – ' + d.end : ''}</td></tr>
-    <tr><td class="lbl">Location</td><td>${LOCATION}</td></tr>
-    <tr><td class="lbl">Facilitator</td><td>${FACILITATOR}</td></tr>
-    <tr><td class="lbl">Attendees</td><td>${esc(attText)}</td></tr>
-    <tr class="sec-row"><td colspan="2">Points of Interest This Week</td></tr>
-    <tr><td class="disc-lbl">Discussion</td><td><ol>${rows}</ol></td></tr>
-    <tr><td colspan="2" style="height:6px;background:#e8f4f8;border:1px solid #b8d8e6"></td></tr>
-    <tr><td class="next-lbl">Next Meeting</td><td>${fmt(d.nextDate)}</td></tr>`;
+    <tr><td class="lbl">Time</td><td>${d.start||''}${d.end?' – '+d.end:''}</td></tr>
+    <tr><td class="lbl">Location</td><td>${LOC}</td></tr>
+    <tr><td class="lbl">Facilitator</td><td>${FAC}</td></tr>
+    <tr><td class="lbl">Attendees</td><td>${esc(atts)}</td></tr>
+    <tr class="sr"><td colspan="2">Points of Interest This Week</td></tr>
+    <tr><td class="dl">Discussion</td><td><ol>${pts.map(p=>`<li>${esc(p)}</li>`).join('')}</ol></td></tr>
+    <tr><td colspan="2" style="height:6px;background:#e8f4f8"></td></tr>
+    <tr><td class="nl">Next Meeting</td><td>${fmt(d.nextDate)}</td></tr>`;
 
-  plainText = [
-    'RSS/CCMS WEEKLY MEETING MINUTES',
-    'ETCADA — Part of the Solution',
-    '',
-    `Date: ${fmt(d.date)}`,
-    `Time: ${d.start || ''}${d.end ? ' – ' + d.end : ''}`,
-    `Location: ${LOCATION}`,
-    `Facilitator: ${FACILITATOR}`,
-    `Attendees: ${attText}`,
-    '',
-    'POINTS OF INTEREST THIS WEEK',
-    'Discussion:',
-    ...pts.map((p, i) => `  ${i + 1}. ${p}`),
-    '',
-    `Date of Next Meeting: ${fmt(d.nextDate)}`
-  ].join('\n');
+  plain = ['RSS/CCMS WEEKLY MEETING MINUTES','ETCADA — Part of the Solution','',
+    `Date: ${fmt(d.date)}`, `Time: ${d.start||''}${d.end?' – '+d.end:''}`,
+    `Location: ${LOC}`, `Facilitator: ${FAC}`, `Attendees: ${atts}`,
+    '','POINTS OF INTEREST THIS WEEK','Discussion:',
+    ...pts.map((p,i)=>`  ${i+1}. ${p}`),
+    '', `Date of Next Meeting: ${fmt(d.nextDate)}`].join('\n');
 }
 
 // ── ACTIONS ───────────────────────────────────────────────────────────────────
-function copyMinutes() {
-  navigator.clipboard.writeText(plainText)
-    .then(() => showToast('Copied to clipboard ✓'))
+function copyMins() {
+  navigator.clipboard.writeText(plain)
+    .then(() => showToast('Copied ✓'))
     .catch(() => {
       const ta = document.createElement('textarea');
-      ta.value = plainText;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      showToast('Copied ✓');
+      ta.value = plain; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta); showToast('Copied ✓');
     });
 }
-
-function printMinutes() {
+function printMins() {
   const d = getData();
-  const w = window.open('', '_blank');
-  const tableHTML = document.getElementById('minTable').outerHTML
-    .replace(/var\(--teal-pale\)/g, '#e8f4f8')
-    .replace(/var\(--teal-mid\)/g, '#b8d8e6')
-    .replace(/var\(--teal-dark\)/g, '#1d6e8a')
-    .replace(/var\(--teal\)/g, '#2B8BAE')
-    .replace(/var\(--text-muted\)/g, '#5a7a86');
-  w.document.write(`<!DOCTYPE html><html><head><title>Meeting Minutes – ${fmt(d.date)}</title>
-  <style>
-    body{font-family:Arial,sans-serif;font-size:13px;margin:30px;color:#1a2e36}
-    h2{color:#155570;font-size:18px;margin-bottom:3px}
-    h4{color:#5a7a86;font-size:11px;font-weight:normal;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px}
-    table{width:100%;border-collapse:collapse}
-    td{border:1px solid #b8d8e6;padding:7px 10px;vertical-align:top}
-    .sec-row td{background:#1d6e8a;color:white;font-weight:bold;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-    .lbl{background:#2B8BAE;color:white;font-weight:bold;width:28%}
-    .disc-lbl{background:#e8f4f8 !important;color:#1d6e8a !important;font-weight:bold}
-    .next-lbl{background:#e8f4f8 !important;color:#5a7a86 !important}
-    ol{margin:0;padding-left:18px;line-height:1.8}
-    @media print{body{margin:16px}}
-  </style></head>
-  <body>
-    <h2>RSS/CCMS Weekly Meeting Minutes</h2>
-    <h4>ETCADA — Part of the Solution</h4>
-    ${tableHTML}
-  </body></html>`);
-  w.document.close();
-  w.print();
+  const w = window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Minutes ${fmt(d.date)}</title>
+  <style>body{font-family:Arial,sans-serif;font-size:13px;margin:30px;color:#1a2e36}
+  h2{color:#155570;font-size:18px;margin-bottom:3px}h4{color:#5a7a86;font-size:11px;font-weight:normal;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px}
+  table{width:100%;border-collapse:collapse}td{border:1px solid #b8d8e6;padding:7px 10px;vertical-align:top}
+  .sr td{background:#1d6e8a;color:white;font-weight:bold;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .lbl{background:#2B8BAE;color:white;font-weight:bold;width:28%}
+  .dl{background:#e8f4f8;color:#1d6e8a;font-weight:bold}.nl{background:#e8f4f8;color:#5a7a86}
+  ol{margin:0;padding-left:18px;line-height:1.8}@media print{body{margin:16px}}</style></head>
+  <body><h2>RSS/CCMS Weekly Meeting Minutes</h2><h4>ETCADA — Part of the Solution</h4>
+  ${document.getElementById('mt').outerHTML}</body></html>`);
+  w.document.close(); w.print();
 }
-
-function emailMinutes() {
+function emailMins() {
   const d = getData();
-  const subject = encodeURIComponent(`Meeting Minutes – ${fmt(d.date)}`);
-  const body = encodeURIComponent(plainText);
-  window.open(`mailto:?subject=${subject}&body=${body}`);
+  window.open(`mailto:?subject=${encodeURIComponent('Meeting Minutes – '+fmt(d.date))}&body=${encodeURIComponent(plain)}`);
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
 function getData() {
   return {
-    date:     document.getElementById('meetDate').value,
-    start:    document.getElementById('startTime').value || '',
-    end:      document.getElementById('endTime').value || '',
-    nextDate: document.getElementById('nextMeeting').value
+    date: document.getElementById('meetDate').value,
+    start: document.getElementById('startTime').value || '',
+    end: document.getElementById('endTime').value || '',
+    nextDate: document.getElementById('nextDate').value
   };
 }
-
 function fmt(s) {
   if (!s) return '—';
-  const d = new Date(s + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' });
+  const d = new Date(s+'T12:00:00');
+  return d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'2-digit'});
 }
-
-function esc(s) {
-  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
 }
 </script>
 </body>
