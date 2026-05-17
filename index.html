@@ -280,14 +280,19 @@ async function callGemini(text) {
   if (GKEY === 'AIzaSyBstMupBPqWM8IcSWksMisDZxrotGr8zF0') throw new Error('API key not set');
   const prompt = `You are formatting staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas.
 
-The text below is raw voice or typed notes from a staff meeting. Do the following:
-1. Split into individual discussion points — one topic per point
-2. Clean each point into a clear, professional, concise sentence
-3. Remove filler words (um, uh, you know, like, so, etc.)
-4. Do NOT add or invent anything not in the original
-5. Return ONLY a numbered list. One point per line. No markdown. No intro text.
+The text below is from a staff meeting. It may be a short voice note, a full transcript, or typed notes. Extract every meaningful discussion point, decision, and action item.
 
-Notes:
+Instructions:
+1. Read the ENTIRE text carefully before writing anything
+2. Extract ALL topics discussed — do not collapse everything into 2 or 3 points
+3. Each numbered point should cover one distinct topic, decision, or action item
+4. Write each point as a clear, professional, complete sentence
+5. Remove filler words (um, uh, you know, like, so, etc.)
+6. Do NOT add or invent anything not in the original
+7. For a long transcript expect 8 to 20+ points — cover everything that was discussed
+8. Return ONLY a numbered list. One point per line. No markdown. No intro text. No section headers.
+
+Text:
 "${text}"`;
 
   const r = await fetch(GURL, {
@@ -295,7 +300,7 @@ Notes:
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { maxOutputTokens: 1000, temperature: 0.2 }
+      generationConfig: { maxOutputTokens: 3000, temperature: 0.2 }
     })
   });
   const d = await r.json();
