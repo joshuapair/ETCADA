@@ -607,16 +607,24 @@ async function generateMinutes() {
 
   let cleaned = points;
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
-    });
+    const GEMINI_KEY = 'AIzaSyAuW4rZflM_fXSHCIY1t_STZRhXNp7G-IA';
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+      {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          contents:[{parts:[{text:prompt}]}],
+          generationConfig:{maxOutputTokens:1000,temperature:0.3}
+        })
+      }
+    );
     const data = await res.json();
-    if (data.content?.[0]?.text) {
-      cleaned = data.content[0].text.trim().split('\n')
+    const geminiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (geminiText) {
+      cleaned = geminiText.trim().split('\n')
         .filter(l=>l.trim())
-        .map(l=>l.replace(/^\d+[\.\)]\s*/,'').trim())
+        .map(l=>l.replace(/^\d+[\.\)\s]*/,'').trim())
         .filter(l=>l);
       dot.className='sdot ok'; stxt.textContent='✓ AI polish applied';
     }
