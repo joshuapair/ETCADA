@@ -13,8 +13,8 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--off);color:var(--tx
 header{background:var(--w);border-bottom:3px solid var(--teal);padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(43,139,174,.12)}
 .logo{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:700;color:var(--tx);display:flex;align-items:baseline;gap:9px}
 .logo small{font-family:'Source Sans 3',sans-serif;font-size:11px;font-weight:600;color:var(--mu);letter-spacing:.07em;text-transform:uppercase}
-.nbtn-hdr{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 15px;font-size:13px;font-weight:700;font-family:'Source Sans 3',sans-serif;cursor:pointer}
-.nbtn-hdr:active{background:var(--td)}
+.hbtn{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 15px;font-size:13px;font-weight:700;font-family:'Source Sans 3',sans-serif;cursor:pointer}
+.hbtn:active{background:var(--td)}
 
 .steps{display:flex;background:var(--tp)}
 .step{flex:1;text-align:center;padding:9px 2px;font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s}
@@ -36,6 +36,7 @@ input[type=text],input[type=date],textarea{width:100%;border:2px solid var(--mid
 input:focus,textarea:focus{border-color:var(--teal);background:#fff}
 textarea{resize:vertical;line-height:1.5}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
 .locked{width:100%;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;font-family:'Source Sans 3',sans-serif;font-size:15px;color:var(--td);background:var(--pale);font-weight:600;display:flex;align-items:center;gap:8px}
 
 /* ATTENDEES */
@@ -51,48 +52,26 @@ textarea{resize:vertical;line-height:1.5}
 .att-del:active{color:var(--red)}
 .att-empty{font-size:13px;color:var(--mu);font-style:italic;padding:8px 0}
 
-/* MIC SECTION */
-.mic-card{background:var(--pale);border:2px dashed var(--mid);border-radius:var(--r);margin:14px 14px 0;padding:18px 14px;text-align:center}
-.mic-status{font-size:13px;color:var(--mu);margin-bottom:14px;line-height:1.6}
-.mic-status b{color:var(--td)}
-.mic-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:12px}
-.mic-btn{width:76px;height:76px;border-radius:50%;border:none;background:var(--teal);color:#fff;font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(43,139,174,.4);transition:all .2s;position:relative}
-.mic-btn:active{transform:scale(.91)}
-.mic-btn.on{background:var(--red);animation:pulse 1.1s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(230,57,70,.5)}70%{box-shadow:0 0 0 22px rgba(230,57,70,0)}100%{box-shadow:0 0 0 0 rgba(230,57,70,0)}}
-.mic-btn.working{background:#f4a261;pointer-events:none}
-.mic-label{font-size:12px;font-weight:700;color:var(--td);letter-spacing:.05em;text-transform:uppercase}
-.mic-label.rec{color:var(--red)}
-.mic-label.proc{color:#c07020}
+/* NOTES INPUT */
+.notes-card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);margin:14px 14px 0;overflow:hidden}
+.tip-box{background:var(--pale);border-bottom:2px solid var(--mid);padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.tip-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:13px;color:var(--td);line-height:1.6}
+.tip-text strong{display:block;font-weight:700;margin-bottom:2px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.notes-area{width:100%;border:none;padding:14px;font-family:'Source Sans 3',sans-serif;font-size:16px;color:var(--tx);background:var(--w);outline:none;line-height:1.6;min-height:120px;resize:none}
+.add-btn{width:100%;background:var(--teal);color:#fff;border:none;border-top:2px solid var(--td);padding:14px;font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s}
+.add-btn:active{background:var(--td)}
+.add-btn:disabled{background:#9bb8c4;pointer-events:none}
 
-/* LIVE TRANSCRIPT */
-.livebox{background:#fff;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;min-height:52px;font-size:14px;color:var(--mu);line-height:1.5;text-align:left;width:100%;font-style:italic}
-.livebox.has{font-style:normal;color:var(--tx)}
-
-/* DIVIDER */
-.divider{display:flex;align-items:center;gap:10px;margin:14px 14px 0;color:var(--mu);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--mid)}
-
-/* KEYBOARD FALLBACK */
-.kb-card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);margin:8px 14px 0;overflow:hidden;border:2px solid var(--mid)}
-.kb-header{background:var(--tp);color:#fff;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
-.kb-body{padding:14px}
-.kb-instruction{background:var(--pale);border:1px solid var(--mid);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;color:var(--td);line-height:1.6}
-.kb-instruction strong{display:block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;color:var(--tp)}
-.kb-textarea{width:100%;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;font-family:'Source Sans 3',sans-serif;font-size:16px;color:var(--tx);background:var(--off);outline:none;-webkit-appearance:none;transition:border-color .18s;line-height:1.5;min-height:80px;resize:vertical}
-.kb-textarea:focus{border-color:var(--teal);background:#fff}
-.kb-add{width:100%;background:var(--teal);color:#fff;border:none;border-radius:9px;padding:12px;font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:9px;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s}
-.kb-add:active{background:var(--td)}
-
-/* POINTS LIST */
+/* POINTS */
 .pts{list-style:none}
-.pt{display:flex;align-items:flex-start;gap:8px;padding:9px 0;border-bottom:1px solid var(--pale);animation:fi .2s ease}
+.pt{display:flex;align-items:flex-start;gap:8px;padding:10px 0;border-bottom:1px solid var(--pale);animation:fi .2s ease}
 .pt:last-child{border-bottom:none}
 .pnum{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .ptxt{flex:1;font-size:14px;line-height:1.45}
-.pdel{background:none;border:none;color:#ccc;font-size:18px;cursor:pointer;padding:0 2px;flex-shrink:0}
+.pdel{background:none;border:none;color:#ccc;font-size:18px;cursor:pointer;padding:0 3px;flex-shrink:0}
 .pdel:active{color:var(--red)}
-.empty-msg{text-align:center;padding:16px 0 6px;font-size:13px;color:var(--mu);font-style:italic}
+.empty-msg{text-align:center;padding:18px 0 8px;font-size:13px;color:var(--mu);font-style:italic}
 
 /* NAV */
 .nav{display:flex;gap:10px;margin:14px 14px 0}
@@ -104,10 +83,6 @@ textarea{resize:vertical;line-height:1.5}
 .nb.gen{background:var(--tp);color:#fff;box-shadow:0 3px 14px rgba(21,85,112,.35)}
 .nb.gen:active{opacity:.88}
 
-/* REVIEW */
-.rev{font-size:14px;line-height:1.8;color:var(--tx)}
-.rev b{color:var(--td)}
-
 /* STATUS */
 .sbar{background:var(--pale);border:1px solid var(--mid);border-radius:9px;padding:9px 12px;font-size:13px;color:var(--td);margin:10px 14px 0;display:none;align-items:center;gap:8px}
 .sbar.show{display:flex}
@@ -117,11 +92,9 @@ textarea{resize:vertical;line-height:1.5}
 .sdot.err{background:var(--red)}
 @keyframes blink{from{opacity:.3}to{opacity:1}}
 
-/* GEMINI STATUS */
-.gstatus{border-radius:9px;padding:9px 12px;font-size:12px;margin:10px 14px 0;display:none;align-items:center;gap:8px}
-.gstatus.show{display:flex}
-.gstatus.ok{background:#e8f8f0;border:1px solid #2a9d8f;color:#1a6b5a}
-.gstatus.err{background:#fef0f0;border:1px solid #e63946;color:#a0202a}
+/* REVIEW */
+.rev{font-size:14px;line-height:1.8;color:var(--tx)}
+.rev b{color:var(--td)}
 
 /* MINUTES */
 .pbox{background:var(--w);border:2px solid var(--mid);border-radius:var(--r);margin:14px 14px 0;overflow:hidden}
@@ -146,7 +119,7 @@ textarea{resize:vertical;line-height:1.5}
 
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--tp);color:#fff;padding:10px 22px;border-radius:24px;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.22);transition:transform .28s ease;z-index:999;white-space:nowrap;max-width:88vw;text-align:center}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.spin{display:inline-block;width:15px;height:15px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle}
+.spin{display:inline-block;width:15px;height:15px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:4px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .note{font-size:11px;color:var(--mu);text-align:center;padding:8px 14px 0;line-height:1.5}
 .pad{height:32px}
@@ -156,7 +129,7 @@ textarea{resize:vertical;line-height:1.5}
 
 <header>
   <div class="logo">ETCADA <small>Minutes</small></div>
-  <button class="nbtn-hdr" onclick="newMeeting()">+ New Meeting</button>
+  <button class="hbtn" onclick="newMeeting()">+ New Meeting</button>
 </header>
 
 <div class="steps">
@@ -166,7 +139,7 @@ textarea{resize:vertical;line-height:1.5}
   <div class="step" id="t4" onclick="goToStep(4)"><span class="n">4</span>Minutes</div>
 </div>
 
-<!-- ══ STEP 1: INFO ══ -->
+<!-- ══ STEP 1 ══ -->
 <div class="page active" id="p1">
   <div class="card">
     <div class="ch">📋 Meeting Details</div>
@@ -185,7 +158,7 @@ textarea{resize:vertical;line-height:1.5}
   </div>
 
   <div class="card">
-    <div class="ch">👥 Attendees <span style="opacity:.7;font-weight:400;font-size:10px;margin-left:4px">(saved — stay until deleted)</span></div>
+    <div class="ch">👥 Attendees <span style="opacity:.7;font-weight:400;font-size:10px;margin-left:4px">(saved until deleted)</span></div>
     <div class="cb">
       <div class="att-row">
         <input type="text" id="attInput" placeholder="Type name, tap +" onkeydown="if(event.key==='Enter')addAtt()">
@@ -203,50 +176,31 @@ textarea{resize:vertical;line-height:1.5}
     </div>
   </div>
 
-  <div class="gstatus" id="gstatus"></div>
-
   <div class="nav">
     <button class="nb next" onclick="goToStep(2)">Next: Add Notes →</button>
   </div>
   <div class="pad"></div>
 </div>
 
-<!-- ══ STEP 2: NOTES ══ -->
+<!-- ══ STEP 2 ══ -->
 <div class="page" id="p2">
 
-  <!-- MIC OPTION -->
-  <div class="mic-card">
-    <div class="mic-status" id="micStatus">
-      <b>Option 1 — Mic Button</b><br>
-      Tap mic, speak all your notes at once, tap stop.<br>Gemini automatically cleans and splits them.
-    </div>
-    <div class="mic-wrap">
-      <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
-      <div class="mic-label" id="micLabel">Tap to Record</div>
-    </div>
-    <div class="livebox" id="livebox">Your speech will appear here as you talk...</div>
-  </div>
-
-  <div class="divider">or type / use keyboard mic</div>
-
-  <!-- KEYBOARD FALLBACK -->
-  <div class="kb-card">
-    <div class="kb-header">⌨️ Option 2 — Keyboard Input</div>
-    <div class="kb-body">
-      <div class="kb-instruction">
-        <strong>📱 iPhone / Android tip</strong>
-        Tap the text box below — your keyboard opens.<br>
-        Look for the <b>🎤 microphone key</b> on your keyboard (bottom row) and tap it to dictate hands-free. Tap it again to stop. Then tap <b>Add &amp; Clean Up</b>.
+  <div class="notes-card">
+    <div class="tip-box">
+      <div class="tip-icon">🎤</div>
+      <div class="tip-text">
+        <strong>How to use voice on your phone</strong>
+        Tap the text area below — your keyboard opens. Look for the <b>🎤 microphone key</b> on your keyboard and tap it to dictate. Speak your notes, tap the mic again to stop. Then tap <b>Add Notes</b> — Gemini will clean and split them automatically.
       </div>
-      <textarea class="kb-textarea" id="manualPt" placeholder="Tap here to type — or use the 🎤 key on your keyboard to speak. You can type multiple points at once and Gemini will split them." rows="4"></textarea>
-      <button class="kb-add" onclick="addManual()">✚ Add &amp; Clean Up with Gemini</button>
     </div>
+    <textarea class="notes-area" id="noteInput" placeholder="Tap here, then use the 🎤 key on your keyboard to speak your notes — or just type them. You can speak everything at once."></textarea>
+    <button class="add-btn" id="addBtn" onclick="addNotes()">✨ Add Notes — Gemini Will Clean Up</button>
   </div>
 
   <div class="card">
     <div class="ch">📝 Discussion Points <span id="ptCount" style="opacity:.75;font-weight:400">0</span></div>
     <div class="cb">
-      <ul class="pts" id="ptList"><li class="empty-msg">No points yet. Use the mic or keyboard above.</li></ul>
+      <ul class="pts" id="ptList"><li class="empty-msg">No points yet — add your notes above.</li></ul>
     </div>
   </div>
 
@@ -257,18 +211,18 @@ textarea{resize:vertical;line-height:1.5}
   <div class="pad"></div>
 </div>
 
-<!-- ══ STEP 3: REVIEW ══ -->
+<!-- ══ STEP 3 ══ -->
 <div class="page" id="p3">
   <div class="card">
     <div class="ch">👁 Review</div>
     <div class="cb rev" id="revBody"></div>
   </div>
   <div class="card">
-    <div class="ch">✨ Final Polish with Gemini</div>
+    <div class="ch">✨ Final Polish</div>
     <div class="cb">
-      <p style="font-size:13px;color:var(--mu);margin-bottom:10px;line-height:1.5">Gemini does one final professional cleanup before formatting your minutes.</p>
+      <p style="font-size:13px;color:var(--mu);margin-bottom:10px;line-height:1.5">Gemini does one final cleanup before formatting your minutes.</p>
       <label>Extra Instructions (optional)</label>
-      <textarea id="aiInstr" placeholder="e.g. Note action items. Keep it concise." style="min-height:56px"></textarea>
+      <textarea id="aiInstr" placeholder="e.g. Note any action items. Keep it brief." style="min-height:56px"></textarea>
     </div>
   </div>
   <div class="sbar" id="sbar"><div class="sdot" id="sdot"></div><span id="stxt"></span></div>
@@ -279,7 +233,7 @@ textarea{resize:vertical;line-height:1.5}
   <div class="pad"></div>
 </div>
 
-<!-- ══ STEP 4: MINUTES ══ -->
+<!-- ══ STEP 4 ══ -->
 <div class="page" id="p4">
   <div class="pbox">
     <div class="phead">RSS/CCMS Weekly Meeting Minutes<span>ETCADA — Part of the Solution</span></div>
@@ -300,15 +254,12 @@ textarea{resize:vertical;line-height:1.5}
 <script>
 const FAC  = 'Brett Foster, RSPS, PSS';
 const LOC  = 'ETCADA';
-const GKEY = 'AIzaSyAuW4rZflM_fXSHCIY1t_STZRhXNp7G-IA';
+const GKEY = 'AIzaSyBstMupBPqWM8IcSWksMisDZxrotGr8zF0';
 const GURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GKEY}`;
 
 let points    = [];
 let attendees = [];
-let recog     = null;
-let listening = false;
-let transcript = '';
-let plain = '';
+let plain     = '';
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
@@ -317,50 +268,25 @@ window.addEventListener('DOMContentLoaded', () => {
   const nxt = new Date(); nxt.setDate(nxt.getDate() + 7);
   document.getElementById('nextDate').value = nxt.toISOString().split('T')[0];
   loadAtts();
-  initSpeech();
-  testGemini();
 });
 
-// ── GEMINI CONNECTION TEST ────────────────────────────────────────────────────
-async function testGemini() {
-  const el = document.getElementById('gstatus');
-  try {
-    const r = await fetch(GURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: 'Reply with one word: ready' }] }],
-        generationConfig: { maxOutputTokens: 5 }
-      })
-    });
-    const d = await r.json();
-    const txt = d.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (txt) {
-      el.textContent = '✅ Gemini is connected and ready';
-      el.className = 'gstatus show ok';
-    } else {
-      el.textContent = '⚠️ Gemini connected but returned no text — check your API key at aistudio.google.com';
-      el.className = 'gstatus show err';
-    }
-  } catch(e) {
-    el.textContent = '❌ Cannot reach Gemini: ' + e.message;
-    el.className = 'gstatus show err';
+// ── GEMINI ────────────────────────────────────────────────────────────────────
+async function callGemini(text, extra) {
+  if (GKEY === 'YOUR_GEMINI_API_KEY_HERE') {
+    throw new Error('API key not set — replace YOUR_GEMINI_API_KEY_HERE in the code');
   }
-}
+  const prompt = `You are formatting staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas.
 
-// ── GEMINI CALL ───────────────────────────────────────────────────────────────
-async function callGemini(rawText) {
-  const prompt = `You are helping format staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas.
+The text below is raw voice or typed notes from a staff meeting. Do the following:
+1. Split into individual discussion points — one topic per point
+2. Clean each point into a clear, professional, concise sentence
+3. Remove filler words (um, uh, you know, like, so, etc.)
+4. Do NOT add or invent anything not in the original
+5. Return ONLY a numbered list. One point per line. No markdown. No intro text.
+${extra ? '\nExtra instructions: ' + extra : ''}
 
-The text below is either a voice transcript or typed notes from a staff meeting. Do the following:
-1. Split it into individual discussion points (one topic per point)
-2. Clean up each point into a clear, professional, concise sentence
-3. Remove filler words like "um", "you know", "like", "so", etc.
-4. Do NOT add, invent, or assume anything not in the original text
-5. Return ONLY a numbered list. No intro text. No markdown symbols. One point per line.
-
-Text:
-"${rawText}"`;
+Notes:
+"${text}"`;
 
   const r = await fetch(GURL, {
     method: 'POST',
@@ -371,14 +297,15 @@ Text:
     })
   });
   const d = await r.json();
+  if (d.error) throw new Error(d.error.message);
   const out = d.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!out) throw new Error(d.error?.message || 'No response from Gemini');
+  if (!out) throw new Error('Gemini returned empty response');
   return out.trim().split('\n')
     .map(l => l.replace(/^\d+[\.\)]\s*/, '').replace(/^[-•*]+\s*/, '').trim())
     .filter(l => l.length > 2);
 }
 
-// ── NAVIGATION ────────────────────────────────────────────────────────────────
+// ── NAV ───────────────────────────────────────────────────────────────────────
 function goToStep(n) {
   document.querySelectorAll('.page').forEach((p,i) => p.classList.toggle('active', i+1===n));
   document.querySelectorAll('.step').forEach((t,i) => {
@@ -391,17 +318,17 @@ function goToStep(n) {
 
 // ── NEW MEETING ───────────────────────────────────────────────────────────────
 function newMeeting() {
-  points = []; transcript = ''; plain = '';
+  points = []; plain = '';
   renderPts();
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('meetDate').value = today;
   const nxt = new Date(); nxt.setDate(nxt.getDate()+7);
   document.getElementById('nextDate').value = nxt.toISOString().split('T')[0];
-  ['startTime','endTime','manualPt','aiInstr'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('livebox').textContent = 'Your speech will appear here as you talk...';
-  document.getElementById('livebox').className = 'livebox';
+  ['startTime','endTime','noteInput','aiInstr'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('sbar').classList.remove('show');
-  if (listening) stopMic();
+  const btn = document.getElementById('addBtn');
+  btn.innerHTML = '✨ Add Notes — Gemini Will Clean Up';
+  btn.disabled = false;
   goToStep(1);
   showToast('Ready for new meeting ✓');
 }
@@ -437,161 +364,36 @@ function renderAtts() {
     </li>`).join('');
 }
 
-// ── SPEECH RECOGNITION ────────────────────────────────────────────────────────
-function initSpeech() {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const btn = document.getElementById('micBtn');
-  const lbl = document.getElementById('micLabel');
-  const status = document.getElementById('micStatus');
-  if (!SR) {
-    btn.style.opacity = '.35';
-    btn.style.pointerEvents = 'none';
-    lbl.textContent = 'Not available on this browser';
-    status.innerHTML = '<b>Option 1 — Mic Button</b><br>Voice recording is not available on your current browser. Please use <b>Option 2</b> below with your keyboard mic 🎤';
-    return;
-  }
-  recog = new SR();
-  recog.continuous = true;
-  recog.interimResults = true;
-  recog.lang = 'en-US';
-  recog.onresult = e => {
-    let interim='', final='';
-    for (let i=e.resultIndex; i<e.results.length; i++) {
-      const t = e.results[i][0].transcript;
-      e.results[i].isFinal ? final+=t : interim+=t;
-    }
-    if (final) transcript += ' ' + final;
-    const disp = (transcript + interim).trim();
-    const box = document.getElementById('livebox');
-    box.textContent = disp || 'Listening...';
-    box.className = 'livebox' + (disp ? ' has' : '');
-  };
-  recog.onerror = e => {
-    if (e.error === 'not-allowed') {
-      showToast('Mic blocked — allow mic in browser settings');
-      stopMic();
-    } else if (e.error !== 'aborted') {
-      showToast('Mic error: ' + e.error);
-      stopMic();
-    }
-  };
-  recog.onend = () => { if (listening) try { recog.start(); } catch(e) {} };
-}
-
-function toggleMic() {
-  if (!recog) { showToast('Use keyboard 🎤 mic in Option 2 below'); return; }
-  listening ? stopAndProcess() : startMic();
-}
-
-function startMic() {
-  transcript = '';
-  document.getElementById('livebox').textContent = 'Listening... speak all your notes now.';
-  document.getElementById('livebox').className = 'livebox';
-  listening = true;
-  const btn = document.getElementById('micBtn');
-  const lbl = document.getElementById('micLabel');
-  btn.classList.add('on');
-  btn.textContent = '⏹';
-  lbl.textContent = 'Recording — Tap to Stop & Process';
-  lbl.className = 'mic-label rec';
-  try { recog.start(); } catch(e) {}
-}
-
-// ── STOP MIC → AUTO SEND TO GEMINI ───────────────────────────────────────────
-async function stopAndProcess() {
-  listening = false;
-  try { recog.stop(); } catch(e) {}
-
-  const raw = transcript.trim();
-  const btn = document.getElementById('micBtn');
-  const lbl = document.getElementById('micLabel');
-
-  btn.classList.remove('on');
-  btn.textContent = '🎤';
-
-  if (!raw) {
-    lbl.textContent = 'Tap to Record';
-    lbl.className = 'mic-label';
-    showToast('Nothing recorded — try again');
-    return;
-  }
-
-  // Show processing state
-  btn.classList.add('working');
-  btn.textContent = '⏳';
-  lbl.textContent = 'Gemini cleaning up your notes...';
-  lbl.className = 'mic-label proc';
-
-  try {
-    const cleaned = await callGemini(raw);
-    if (cleaned.length > 0) {
-      cleaned.forEach(p => points.push(p));
-      renderPts();
-      showToast(`✓ ${cleaned.length} point${cleaned.length>1?'s':''} added and cleaned`);
-    } else {
-      points.push(raw);
-      renderPts();
-      showToast('Added as-is (Gemini returned empty)');
-    }
-  } catch(e) {
-    // Gemini failed — add raw text as fallback, show error
-    points.push(raw);
-    renderPts();
-    showToast('Gemini error — added raw. Check connection.');
-    console.error('Gemini error:', e);
-  }
-
-  transcript = '';
-  document.getElementById('livebox').textContent = 'Your speech will appear here as you talk...';
-  document.getElementById('livebox').className = 'livebox';
-  btn.classList.remove('working');
-  btn.textContent = '🎤';
-  lbl.textContent = 'Tap to Record Again';
-  lbl.className = 'mic-label';
-}
-
-function stopMic() {
-  listening = false;
-  try { recog.stop(); } catch(e) {}
-  const btn = document.getElementById('micBtn');
-  const lbl = document.getElementById('micLabel');
-  btn.classList.remove('on','working');
-  btn.textContent = '🎤';
-  lbl.textContent = 'Tap to Record';
-  lbl.className = 'mic-label';
-}
-
-// ── MANUAL / KEYBOARD INPUT → AUTO GEMINI ────────────────────────────────────
-async function addManual() {
-  const ta = document.getElementById('manualPt');
+// ── ADD NOTES → AUTO GEMINI ───────────────────────────────────────────────────
+async function addNotes() {
+  const ta  = document.getElementById('noteInput');
   const raw = ta.value.trim();
-  if (!raw) return;
+  if (!raw) { showToast('Type or speak your notes first'); return; }
 
-  const btn = document.querySelector('.kb-add');
-  btn.innerHTML = '<span class="spin"></span> Gemini cleaning up...';
-  btn.style.pointerEvents = 'none';
+  const btn = document.getElementById('addBtn');
+  btn.innerHTML = '<span class="spin"></span> Gemini is cleaning up...';
+  btn.disabled = true;
 
   try {
-    const cleaned = await callGemini(raw);
+    const cleaned = await callGemini(raw, '');
     if (cleaned.length > 0) {
       cleaned.forEach(p => points.push(p));
       renderPts();
-      showToast(`✓ ${cleaned.length} point${cleaned.length>1?'s':''} added and cleaned`);
+      ta.value = '';
+      showToast(`✓ ${cleaned.length} point${cleaned.length>1?'s':''} added`);
     } else {
       points.push(raw);
       renderPts();
-      showToast('Added (Gemini returned empty)');
+      ta.value = '';
+      showToast('Added as-is — Gemini returned empty');
     }
   } catch(e) {
-    points.push(raw);
-    renderPts();
-    showToast('Gemini error — added raw. Check connection.');
+    showToast('Error: ' + e.message.substring(0, 60));
     console.error(e);
   }
 
-  ta.value = '';
-  btn.innerHTML = '✚ Add &amp; Clean Up with Gemini';
-  btn.style.pointerEvents = '';
+  btn.innerHTML = '✨ Add Notes — Gemini Will Clean Up';
+  btn.disabled = false;
 }
 
 // ── POINTS ────────────────────────────────────────────────────────────────────
@@ -599,7 +401,7 @@ function delPt(i) { points.splice(i,1); renderPts(); }
 function renderPts() {
   document.getElementById('ptCount').textContent = points.length;
   const l = document.getElementById('ptList');
-  if (!points.length) { l.innerHTML='<li class="empty-msg">No points yet. Use the mic or keyboard above.</li>'; return; }
+  if (!points.length) { l.innerHTML='<li class="empty-msg">No points yet — add your notes above.</li>'; return; }
   l.innerHTML = points.map((p,i) => `
     <li class="pt">
       <span class="pnum">${i+1}</span>
@@ -622,12 +424,12 @@ function buildReview() {
     ${points.map((p,i)=>`${i+1}. ${esc(p)}`).join('<br>')}`;
 }
 
-// ── FINAL GENERATE ────────────────────────────────────────────────────────────
+// ── GENERATE ──────────────────────────────────────────────────────────────────
 async function generate() {
-  if (!points.length) { showToast('Add at least one discussion point'); return; }
-  const btn = document.getElementById('genBtn');
-  const sb  = document.getElementById('sbar');
-  const dot = document.getElementById('sdot');
+  if (!points.length) { showToast('Add at least one point first'); return; }
+  const btn  = document.getElementById('genBtn');
+  const sb   = document.getElementById('sbar');
+  const dot  = document.getElementById('sdot');
   const stxt = document.getElementById('stxt');
   btn.innerHTML = '<span class="spin"></span> Generating...';
   btn.disabled = true;
@@ -636,25 +438,20 @@ async function generate() {
   stxt.textContent = 'Gemini doing final polish...';
 
   const extra = document.getElementById('aiInstr').value.trim();
-  const finalPrompt = `You are finalizing staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas. Do a final professional cleanup of these points. Make each one clear, concise, and professional. Do NOT add anything not already present. Return ONLY a numbered list, no markdown.${extra ? '\n\nExtra: ' + extra : ''}
-
-Points:
-${points.map((p,i)=>`${i+1}. ${p}`).join('\n')}`;
-
   let final = points;
   try {
-    const cleaned = await callGemini(finalPrompt);
+    const cleaned = await callGemini(points.map((p,i)=>`${i+1}. ${p}`).join('\n'), extra);
     if (cleaned.length > 0) {
       final = cleaned;
       dot.className = 'sdot ok';
-      stxt.textContent = '✓ Gemini final polish applied';
+      stxt.textContent = '✓ Final polish applied';
     } else {
       dot.className = 'sdot err';
-      stxt.textContent = 'Using existing points (Gemini returned empty)';
+      stxt.textContent = 'Using current points (Gemini returned empty)';
     }
   } catch(e) {
     dot.className = 'sdot err';
-    stxt.textContent = 'Gemini error — using current points';
+    stxt.textContent = 'Error: ' + e.message.substring(0,50);
     console.error(e);
   }
 
@@ -664,7 +461,7 @@ ${points.map((p,i)=>`${i+1}. ${p}`).join('\n')}`;
   goToStep(4);
 }
 
-// ── TABLE ─────────────────────────────────────────────────────────────────────
+// ── BUILD TABLE ───────────────────────────────────────────────────────────────
 function buildTable(d, pts) {
   const atts = attendees.length ? attendees.join(', ') : '—';
   document.getElementById('mt').innerHTML = `
@@ -680,22 +477,22 @@ function buildTable(d, pts) {
     <tr><td class="nl">Next Meeting</td><td>${fmt(d.nextDate)}</td></tr>`;
 
   plain = ['RSS/CCMS WEEKLY MEETING MINUTES','ETCADA — Part of the Solution','',
-    `Date: ${fmt(d.date)}`, `Time: ${d.start||''}${d.end?' – '+d.end:''}`,
-    `Location: ${LOC}`, `Facilitator: ${FAC}`, `Attendees: ${atts}`,
-    '','POINTS OF INTEREST THIS WEEK','Discussion:',
-    ...pts.map((p,i)=>`  ${i+1}. ${p}`),
-    '', `Date of Next Meeting: ${fmt(d.nextDate)}`].join('\n');
+    `Date: ${fmt(d.date)}`,`Time: ${d.start||''}${d.end?' – '+d.end:''}`,
+    `Location: ${LOC}`,`Facilitator: ${FAC}`,`Attendees: ${atts}`,'',
+    'POINTS OF INTEREST THIS WEEK','Discussion:',
+    ...pts.map((p,i)=>`  ${i+1}. ${p}`),'',
+    `Date of Next Meeting: ${fmt(d.nextDate)}`].join('\n');
 }
 
 // ── ACTIONS ───────────────────────────────────────────────────────────────────
 function copyMins() {
   navigator.clipboard.writeText(plain)
-    .then(() => showToast('Copied ✓'))
-    .catch(() => {
-      const ta = document.createElement('textarea');
-      ta.value = plain; document.body.appendChild(ta);
-      ta.select(); document.execCommand('copy');
-      document.body.removeChild(ta); showToast('Copied ✓');
+    .then(()=>showToast('Copied ✓'))
+    .catch(()=>{
+      const ta=document.createElement('textarea');
+      ta.value=plain;document.body.appendChild(ta);
+      ta.select();document.execCommand('copy');
+      document.body.removeChild(ta);showToast('Copied ✓');
     });
 }
 function printMins() {
@@ -703,13 +500,18 @@ function printMins() {
   const w = window.open('','_blank');
   w.document.write(`<!DOCTYPE html><html><head><title>Minutes ${fmt(d.date)}</title>
   <style>body{font-family:Arial,sans-serif;font-size:13px;margin:30px;color:#1a2e36}
-  h2{color:#155570;font-size:18px;margin-bottom:3px}h4{color:#5a7a86;font-size:11px;font-weight:normal;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px}
-  table{width:100%;border-collapse:collapse}td{border:1px solid #b8d8e6;padding:7px 10px;vertical-align:top}
+  h2{color:#155570;font-size:18px;margin-bottom:3px}
+  h4{color:#5a7a86;font-size:11px;font-weight:normal;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px}
+  table{width:100%;border-collapse:collapse}
+  td{border:1px solid #b8d8e6;padding:7px 10px;vertical-align:top}
   .sr td{background:#1d6e8a;color:white;font-weight:bold;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
   .lbl{background:#2B8BAE;color:white;font-weight:bold;width:28%}
-  .dl{background:#e8f4f8;color:#1d6e8a;font-weight:bold}.nl{background:#e8f4f8;color:#5a7a86}
-  ol{margin:0;padding-left:18px;line-height:1.8}@media print{body{margin:16px}}</style></head>
-  <body><h2>RSS/CCMS Weekly Meeting Minutes</h2><h4>ETCADA — Part of the Solution</h4>
+  .dl{background:#e8f4f8;color:#1d6e8a;font-weight:bold}
+  .nl{background:#e8f4f8;color:#5a7a86}
+  ol{margin:0;padding-left:18px;line-height:1.8}
+  @media print{body{margin:16px}}</style></head>
+  <body><h2>RSS/CCMS Weekly Meeting Minutes</h2>
+  <h4>ETCADA — Part of the Solution</h4>
   ${document.getElementById('mt').outerHTML}</body></html>`);
   w.document.close(); w.print();
 }
@@ -721,10 +523,10 @@ function emailMins() {
 // ── UTILS ─────────────────────────────────────────────────────────────────────
 function getData() {
   return {
-    date: document.getElementById('meetDate').value,
-    start: document.getElementById('startTime').value || '',
-    end: document.getElementById('endTime').value || '',
-    nextDate: document.getElementById('nextDate').value
+    date:    document.getElementById('meetDate').value,
+    start:   document.getElementById('startTime').value||'',
+    end:     document.getElementById('endTime').value||'',
+    nextDate:document.getElementById('nextDate').value
   };
 }
 function fmt(s) {
@@ -734,9 +536,9 @@ function fmt(s) {
 }
 function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
 }
 </script>
 </body>
