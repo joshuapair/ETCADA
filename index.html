@@ -18,6 +18,7 @@
   --text: #1a2e36;
   --text-muted: #5a7a86;
   --red: #e63946;
+  --green: #2a9d8f;
   --radius: 14px;
   --shadow: 0 2px 12px rgba(43,139,174,0.14);
 }
@@ -69,34 +70,28 @@ header {
   color: white;
   border: none;
   border-radius: 20px;
-  padding: 7px 14px;
+  padding: 8px 16px;
   font-size: 13px;
   font-weight: 700;
   font-family: 'Source Sans 3', sans-serif;
   cursor: pointer;
+  transition: background 0.2s;
 }
+.new-btn:active { background: var(--teal-dark); }
 
 /* PROGRESS */
-.progress-bar {
-  display: flex;
-  background: var(--teal-deep);
-}
+.progress-bar { display: flex; background: var(--teal-deep); }
 .prog-step {
-  flex: 1;
-  text-align: center;
-  padding: 9px 2px;
-  font-size: 10px;
-  font-weight: 700;
+  flex: 1; text-align: center; padding: 9px 2px;
+  font-size: 10px; font-weight: 700;
   color: rgba(255,255,255,0.45);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em; text-transform: uppercase;
   border-bottom: 3px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s;
+  cursor: pointer; transition: all 0.2s;
 }
 .prog-step .snum { display: block; font-size: 17px; line-height: 1.1; font-family: 'Libre Baskerville', serif; }
 .prog-step.active { color: white; border-bottom-color: white; background: rgba(255,255,255,0.1); }
-.prog-step.done { color: rgba(255,255,255,0.65); }
+.prog-step.done { color: rgba(255,255,255,0.7); }
 
 /* PAGES */
 .page { display: none; animation: fadeIn 0.22s ease; }
@@ -111,7 +106,6 @@ header {
   margin: 14px 14px 0;
   overflow: hidden;
 }
-.card.last { margin-bottom: 0; }
 .card-header {
   background: var(--teal);
   color: white;
@@ -129,15 +123,30 @@ header {
 /* FORM */
 label {
   display: block;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 11px; font-weight: 700;
   color: var(--teal-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  margin-bottom: 5px;
-  margin-top: 12px;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  margin-bottom: 5px; margin-top: 12px;
 }
 label:first-child { margin-top: 0; }
+
+/* LOCKED FIELD */
+.locked-field {
+  width: 100%;
+  border: 2px solid var(--teal-mid);
+  border-radius: 9px;
+  padding: 10px 12px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  color: var(--teal-dark);
+  background: var(--teal-pale);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lock-icon { font-size: 12px; opacity: 0.6; }
+
 input[type="text"], input[type="date"], textarea {
   width: 100%;
   border: 2px solid var(--teal-mid);
@@ -154,6 +163,35 @@ input[type="text"], input[type="date"], textarea {
 input:focus, textarea:focus { border-color: var(--teal); background: white; }
 textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ATTENDEES */
+.attendee-input-row {
+  display: flex; gap: 8px; margin-bottom: 10px;
+}
+.attendee-input-row input { flex: 1; margin: 0; }
+.att-add-btn {
+  background: var(--teal); color: white;
+  border: none; border-radius: 9px;
+  padding: 0 14px; font-size: 20px;
+  cursor: pointer; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.att-add-btn:active { background: var(--teal-dark); }
+.attendee-list { list-style: none; }
+.attendee-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 0; border-bottom: 1px solid var(--teal-pale);
+  font-size: 14px; animation: fadeIn 0.2s ease;
+}
+.attendee-item:last-child { border-bottom: none; }
+.att-name { flex: 1; }
+.att-del {
+  background: none; border: none;
+  color: #ccc; font-size: 16px; cursor: pointer;
+  padding: 2px 4px; transition: color 0.15s;
+}
+.att-del:active { color: var(--red); }
+.att-empty { font-size: 13px; color: var(--text-muted); font-style: italic; padding: 8px 0; }
 
 /* VOICE */
 .voice-card {
@@ -232,20 +270,23 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
   padding: 11px; font-family: 'Source Sans 3', sans-serif;
   font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 9px;
   display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: background 0.15s;
 }
+.type-btn:active { background: var(--teal-pale); }
 
 /* STATUS */
 .status-bar {
   background: var(--teal-pale); border: 1px solid var(--teal-mid);
-  border-radius: 9px; padding: 8px 12px; font-size: 12px;
+  border-radius: 9px; padding: 9px 12px; font-size: 13px;
   color: var(--teal-dark); margin: 10px 14px 0;
-  display: none; align-items: center; gap: 7px;
+  display: none; align-items: center; gap: 8px;
 }
 .status-bar.show { display: flex; }
-.sdot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+.sdot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
 .sdot.spin { background: #f4a261; animation: blink 0.8s ease infinite alternate; }
-.sdot.ok { background: #2a9d8f; }
-@keyframes blink { from { opacity: 0.3; } to { opacity: 1; } }
+.sdot.ok { background: var(--green); }
+.sdot.err { background: var(--red); }
+@keyframes blink { from { opacity:0.3; } to { opacity:1; } }
 
 /* NAV */
 .nav-row { display: flex; gap: 10px; margin: 14px 14px 0; }
@@ -255,15 +296,17 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
   font-weight: 700; cursor: pointer; transition: all 0.18s;
 }
 .nav-btn.back { background: white; color: var(--teal); border: 2px solid var(--teal-mid); }
+.nav-btn.back:active { background: var(--teal-pale); }
 .nav-btn.next { background: var(--teal); color: white; box-shadow: 0 3px 14px rgba(43,139,174,0.35); }
 .nav-btn.next:active { background: var(--teal-dark); }
 .nav-btn.gen { background: var(--teal-deep); color: white; box-shadow: 0 3px 14px rgba(21,85,112,0.35); }
+.nav-btn.gen:active { opacity: 0.88; }
 
 /* REVIEW */
-.review-body { font-size: 14px; line-height: 1.75; color: var(--text); }
+.review-body { font-size: 14px; line-height: 1.8; color: var(--text); }
 .review-body b { color: var(--teal-dark); }
 
-/* MINUTES PREVIEW */
+/* MINUTES TABLE */
 .preview-box {
   background: var(--white); border: 2px solid var(--teal-mid);
   border-radius: var(--radius); margin: 14px 14px 0; overflow: hidden;
@@ -297,8 +340,8 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
   transition: all 0.18s;
 }
 .act-btn:active { transform: scale(0.95); opacity: 0.88; }
-.act-btn.copy { background: var(--teal); color: white; box-shadow: var(--shadow); }
-.act-btn.print { background: var(--teal-deep); color: white; box-shadow: var(--shadow); }
+.act-btn.copy { background: var(--teal); color: white; }
+.act-btn.print { background: var(--teal-deep); color: white; }
 .act-btn.email { background: white; color: var(--teal); border: 2px solid var(--teal-mid); }
 .act-btn.restart { background: white; color: var(--text-muted); border: 2px solid #ddd; }
 
@@ -321,15 +364,15 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.pad { height: 30px; }
 .note { font-size: 11px; color: var(--text-muted); text-align: center; padding: 8px 14px 0; line-height: 1.5; }
+.pad { height: 30px; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="etcada-logo">ETCADA <small>Meeting Minutes</small></div>
-  <button class="new-btn" onclick="resetAll()">+ New</button>
+  <div class="etcada-logo">ETCADA <small>Minutes</small></div>
+  <button class="new-btn" onclick="newMeeting()">+ New Meeting</button>
 </header>
 
 <div class="progress-bar">
@@ -339,42 +382,61 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
   <div class="prog-step" id="tab4" onclick="goToStep(4)"><span class="snum">4</span>Minutes</div>
 </div>
 
-<!-- ═══════════════════════════════════ STEP 1 ═══ -->
+<!-- ══════════════ STEP 1: INFO ══════════════ -->
 <div class="page active" id="page1">
   <div class="card">
-    <div class="card-header">📋 RSS Staff Meeting</div>
+    <div class="card-header">📋 Meeting Details</div>
     <div class="card-body">
+
+      <label>Facilitator</label>
+      <div class="locked-field"><span class="lock-icon">🔒</span> Brett Foster, RSPS, PSS</div>
+
+      <label>Location</label>
+      <div class="locked-field"><span class="lock-icon">🔒</span> ETCADA</div>
+
       <label>Date</label>
       <input type="date" id="meetDate">
+
       <div class="row2">
         <div><label>Start Time</label><input type="text" id="startTime" placeholder="8:00am"></div>
         <div><label>End Time</label><input type="text" id="endTime" placeholder="9:00am"></div>
       </div>
-      <label>Location</label>
-      <input type="text" id="location" placeholder="Recovery Center">
-      <label>Facilitator</label>
-      <input type="text" id="facilitator" placeholder="Name">
-      <label>Attendees</label>
-      <textarea id="attendees" placeholder="Names separated by commas"></textarea>
+
     </div>
   </div>
-  <div class="card last">
+
+  <!-- ATTENDEES -->
+  <div class="card">
+    <div class="card-header">👥 Attendees <span style="opacity:0.7;font-weight:400;font-size:10px;margin-left:4px">(saved automatically)</span></div>
+    <div class="card-body">
+      <div class="attendee-input-row">
+        <input type="text" id="attInput" placeholder="Type name and tap +" onkeydown="if(event.key==='Enter')addAttendee()">
+        <button class="att-add-btn" onclick="addAttendee()">+</button>
+      </div>
+      <ul class="attendee-list" id="attendeeList">
+        <li class="att-empty">No attendees added yet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
     <div class="card-header">📅 Next Meeting</div>
     <div class="card-body">
       <label>Date of Next Meeting</label>
       <input type="date" id="nextMeeting">
     </div>
   </div>
+
   <div class="nav-row">
     <button class="nav-btn next" onclick="goToStep(2)">Next: Add Notes →</button>
   </div>
   <div class="pad"></div>
 </div>
 
-<!-- ═══════════════════════════════════ STEP 2 ═══ -->
+<!-- ══════════════ STEP 2: NOTES ══════════════ -->
 <div class="page" id="page2">
   <div class="voice-card">
-    <p class="voice-hint">Tap the mic, speak a discussion point, then tap <b>Add This Point</b>. Repeat for each item.</p>
+    <p class="voice-hint">Tap the mic, speak one discussion point, tap <b>Add This Point</b>. Repeat for each item.</p>
     <div class="mic-wrap">
       <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
       <div class="mic-label" id="micLabel">Tap to Record</div>
@@ -391,8 +453,8 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
     </div>
   </div>
 
-  <div class="card last">
-    <div class="card-header">📝 Discussion Points &nbsp;<span id="pointCount" style="opacity:0.75">0</span></div>
+  <div class="card">
+    <div class="card-header">📝 Discussion Points &nbsp;<span id="pointCount" style="opacity:0.75;font-weight:400">0</span></div>
     <div class="card-body">
       <ul class="points-list" id="pointsList">
         <li class="empty-msg">No points added yet.</li>
@@ -407,24 +469,26 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
   <div class="pad"></div>
 </div>
 
-<!-- ═══════════════════════════════════ STEP 3 ═══ -->
+<!-- ══════════════ STEP 3: REVIEW ══════════════ -->
 <div class="page" id="page3">
   <div class="card">
-    <div class="card-header">👁 Review</div>
+    <div class="card-header">👁 Review Before Generating</div>
     <div class="card-body review-body" id="reviewBody"></div>
   </div>
-  <div class="card last">
-    <div class="card-header">✨ AI Polish (Optional)</div>
+  <div class="card">
+    <div class="card-header">✨ AI Polish with Gemini</div>
     <div class="card-body">
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px;line-height:1.5">Claude will clean up voice notes into professional discussion points.</p>
-      <label>Extra Instructions</label>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px;line-height:1.5">Gemini will clean up your voice notes into professional discussion points.</p>
+      <label>Extra Instructions (optional)</label>
       <textarea id="aiInstr" placeholder="e.g. Keep it brief. Note any action items." rows="2"></textarea>
     </div>
   </div>
+
   <div class="status-bar" id="statusBar">
     <div class="sdot" id="sdot"></div>
     <span id="statusTxt">Processing...</span>
   </div>
+
   <div class="nav-row">
     <button class="nav-btn back" onclick="goToStep(2)">← Back</button>
     <button class="nav-btn gen" id="genBtn" onclick="generateMinutes()">✨ Generate Minutes</button>
@@ -432,7 +496,7 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
   <div class="pad"></div>
 </div>
 
-<!-- ═══════════════════════════════════ STEP 4 ═══ -->
+<!-- ══════════════ STEP 4: MINUTES ══════════════ -->
 <div class="page" id="page4">
   <div class="preview-box">
     <div class="preview-head">RSS/CCMS Weekly Meeting Minutes<span>ETCADA — Part of the Solution</span></div>
@@ -442,41 +506,139 @@ textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
   </div>
   <div class="action-grid">
     <button class="act-btn copy" onclick="copyMinutes()">📋 Copy</button>
-    <button class="act-btn print" onclick="printMinutes()">🖨️ Print/PDF</button>
+    <button class="act-btn print" onclick="printMinutes()">🖨️ Print / PDF</button>
     <button class="act-btn email" onclick="emailMinutes()">✉️ Email</button>
-    <button class="act-btn restart" onclick="resetAll()">↺ New</button>
+    <button class="act-btn restart" onclick="newMeeting()">↺ New Meeting</button>
   </div>
-  <p class="note">Print/PDF saves a file or lets you share from your phone.</p>
+  <p class="note">Print / PDF to save a file or share from your phone.</p>
   <div class="pad"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+// ── CONSTANTS ─────────────────────────────────────────────────────────────────
+const FACILITATOR = 'Brett Foster, RSPS, PSS';
+const LOCATION    = 'ETCADA';
+const GEMINI_KEY  = 'AIzaSyAuW4rZflM_fXSHCIY1t_STZRhXNp7G-IA';
+const GEMINI_URL  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
 let points = [];
+let attendees = [];
 let recognition = null;
 let isListening = false;
 let currentTranscript = '';
 let plainText = '';
 
+// ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
+  // Set today's date
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('meetDate').value = today;
-  const next = new Date(); next.setDate(next.getDate() + 7);
+  // Next week default
+  const next = new Date();
+  next.setDate(next.getDate() + 7);
   document.getElementById('nextMeeting').value = next.toISOString().split('T')[0];
+  // Load saved attendees
+  loadAttendees();
+  // Init speech
   initSpeech();
 });
 
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
 function goToStep(n) {
-  document.querySelectorAll('.page').forEach((p,i) => p.classList.toggle('active', i+1===n));
-  document.querySelectorAll('.prog-step').forEach((t,i) => {
-    t.classList.toggle('active', i+1===n);
-    t.classList.toggle('done', i+1<n);
+  document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i + 1 === n));
+  document.querySelectorAll('.prog-step').forEach((t, i) => {
+    t.classList.toggle('active', i + 1 === n);
+    t.classList.toggle('done', i + 1 < n);
   });
-  if (n===3) buildReview();
-  window.scrollTo(0,0);
+  if (n === 3) buildReview();
+  window.scrollTo(0, 0);
 }
 
+// ── NEW MEETING — only clears meeting-specific data, keeps attendees ───────────
+function newMeeting() {
+  points = [];
+  currentTranscript = '';
+  plainText = '';
+  renderPoints();
+
+  // Reset date fields to today / next week
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('meetDate').value = today;
+  const next = new Date();
+  next.setDate(next.getDate() + 7);
+  document.getElementById('nextMeeting').value = next.toISOString().split('T')[0];
+  document.getElementById('startTime').value = '';
+  document.getElementById('endTime').value = '';
+  document.getElementById('manualPoint').value = '';
+  document.getElementById('aiInstr').value = '';
+  document.getElementById('liveBox').textContent = 'Tap mic to start...';
+  document.getElementById('liveBox').className = 'live-box';
+  document.getElementById('addVoiceBtn').classList.remove('show');
+  document.getElementById('statusBar').classList.remove('show');
+
+  if (isListening) stopListening();
+  goToStep(1);
+  showToast('Ready for new meeting ✓');
+}
+
+// ── ATTENDEES (persistent via localStorage) ────────────────────────────────────
+function loadAttendees() {
+  try {
+    const saved = localStorage.getItem('etcada_attendees');
+    attendees = saved ? JSON.parse(saved) : [];
+  } catch(e) {
+    attendees = [];
+  }
+  renderAttendees();
+}
+
+function saveAttendees() {
+  try {
+    localStorage.setItem('etcada_attendees', JSON.stringify(attendees));
+  } catch(e) {}
+}
+
+function addAttendee() {
+  const inp = document.getElementById('attInput');
+  const name = inp.value.trim();
+  if (!name) return;
+  if (attendees.includes(name)) {
+    showToast('Already in list');
+    inp.value = '';
+    return;
+  }
+  attendees.push(name);
+  saveAttendees();
+  renderAttendees();
+  inp.value = '';
+  showToast(name + ' added ✓');
+}
+
+function deleteAttendee(i) {
+  const name = attendees[i];
+  attendees.splice(i, 1);
+  saveAttendees();
+  renderAttendees();
+  showToast(name + ' removed');
+}
+
+function renderAttendees() {
+  const list = document.getElementById('attendeeList');
+  if (!attendees.length) {
+    list.innerHTML = '<li class="att-empty">No attendees added yet.</li>';
+    return;
+  }
+  list.innerHTML = attendees.map((a, i) => `
+    <li class="attendee-item">
+      <span class="att-name">${esc(a)}</span>
+      <button class="att-del" onclick="deleteAttendee(${i})">✕</button>
+    </li>`).join('');
+}
+
+// ── SPEECH RECOGNITION ────────────────────────────────────────────────────────
 function initSpeech() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) {
@@ -488,22 +650,27 @@ function initSpeech() {
   recognition.continuous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';
+
   recognition.onresult = e => {
-    let interim='', final='';
-    for (let i=e.resultIndex; i<e.results.length; i++) {
+    let interim = '', final = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
       const t = e.results[i][0].transcript;
-      e.results[i].isFinal ? final+=t : interim+=t;
+      e.results[i].isFinal ? final += t : interim += t;
     }
     if (final) currentTranscript += ' ' + final;
     const display = (currentTranscript + interim).trim();
     const box = document.getElementById('liveBox');
     box.textContent = display || 'Listening...';
     box.className = 'live-box' + (display ? ' has-text' : '');
-    const btn = document.getElementById('addVoiceBtn');
-    btn.classList.toggle('show', !!display);
+    document.getElementById('addVoiceBtn').classList.toggle('show', !!display);
   };
-  recognition.onerror = e => { if (e.error!=='aborted') { stopListening(); showToast('Mic error: ' + e.error); } };
-  recognition.onend = () => { if (isListening) try { recognition.start(); } catch(e){} };
+
+  recognition.onerror = e => {
+    if (e.error !== 'aborted') { stopListening(); showToast('Mic error: ' + e.error); }
+  };
+  recognition.onend = () => {
+    if (isListening) try { recognition.start(); } catch(e) {}
+  };
 }
 
 function toggleMic() {
@@ -519,14 +686,14 @@ function startListening() {
   isListening = true;
   document.getElementById('micBtn').classList.add('listening');
   document.getElementById('micBtn').textContent = '⏹';
-  document.getElementById('micLabel').textContent = 'Recording — Tap Stop';
+  document.getElementById('micLabel').textContent = 'Recording — Tap to Stop';
   document.getElementById('micLabel').className = 'mic-label recording';
-  recognition.start();
+  try { recognition.start(); } catch(e) {}
 }
 
 function stopListening() {
   isListening = false;
-  try { recognition.stop(); } catch(e){}
+  try { recognition.stop(); } catch(e) {}
   document.getElementById('micBtn').classList.remove('listening');
   document.getElementById('micBtn').textContent = '🎤';
   document.getElementById('micLabel').textContent = 'Tap to Record';
@@ -560,38 +727,45 @@ function addPoint(text) {
 }
 
 function deletePoint(i) {
-  points.splice(i,1);
+  points.splice(i, 1);
   renderPoints();
 }
 
 function renderPoints() {
   document.getElementById('pointCount').textContent = points.length;
   const list = document.getElementById('pointsList');
-  if (!points.length) { list.innerHTML = '<li class="empty-msg">No points added yet.</li>'; return; }
-  list.innerHTML = points.map((p,i) => `
+  if (!points.length) {
+    list.innerHTML = '<li class="empty-msg">No points added yet.</li>';
+    return;
+  }
+  list.innerHTML = points.map((p, i) => `
     <li class="point-item">
-      <span class="point-num">${i+1}</span>
+      <span class="point-num">${i + 1}</span>
       <span class="point-text">${esc(p)}</span>
       <button class="point-del" onclick="deletePoint(${i})">✕</button>
     </li>`).join('');
 }
 
+// ── REVIEW ────────────────────────────────────────────────────────────────────
 function buildReview() {
   const d = getData();
   document.getElementById('reviewBody').innerHTML = `
-    <b>Date:</b> ${fmt(d.date)} &nbsp;|&nbsp; <b>Time:</b> ${d.start}${d.end?' – '+d.end:''}<br>
-    <b>Location:</b> ${esc(d.location)||'—'}<br>
-    <b>Facilitator:</b> ${esc(d.facilitator)||'—'}<br>
-    <b>Attendees:</b> ${esc(d.attendees)||'—'}<br>
+    <b>Date:</b> ${fmt(d.date)}<br>
+    <b>Time:</b> ${d.start || '—'}${d.end ? ' – ' + d.end : ''}<br>
+    <b>Location:</b> ${LOCATION}<br>
+    <b>Facilitator:</b> ${FACILITATOR}<br>
+    <b>Attendees:</b> ${attendees.length ? esc(attendees.join(', ')) : '—'}<br>
     <b>Next Meeting:</b> ${fmt(d.nextDate)}<br><br>
-    <b>${points.length} Discussion Point${points.length!==1?'s':''}:</b><br>
-    ${points.map((p,i)=>`${i+1}. ${esc(p)}`).join('<br>')}`;
+    <b>${points.length} Discussion Point${points.length !== 1 ? 's' : ''}:</b><br>
+    ${points.map((p, i) => `${i + 1}. ${esc(p)}`).join('<br>')}`;
 }
 
+// ── GENERATE WITH GEMINI ──────────────────────────────────────────────────────
 async function generateMinutes() {
-  if (!points.length) { showToast('Add at least one point first'); return; }
+  if (!points.length) { showToast('Add at least one discussion point'); return; }
+
   const btn = document.getElementById('genBtn');
-  const sb = document.getElementById('statusBar');
+  const sb  = document.getElementById('statusBar');
   const dot = document.getElementById('sdot');
   const stxt = document.getElementById('statusTxt');
 
@@ -599,147 +773,167 @@ async function generateMinutes() {
   btn.disabled = true;
   sb.classList.add('show');
   dot.className = 'sdot spin';
-  stxt.textContent = 'Cleaning up notes with AI...';
+  stxt.textContent = 'Gemini is polishing your notes...';
 
-  const d = getData();
   const extra = document.getElementById('aiInstr').value.trim();
-  const prompt = `You are formatting meeting minutes for ETCADA, a behavioral health nonprofit. Clean up these raw discussion points into clear, professional, concise items. Keep all content — do not invent anything. Number them. Return ONLY the numbered list.\n${extra?'Instructions: '+extra+'\n':''}Raw notes:\n${points.map((p,i)=>`${i+1}. ${p}`).join('\n')}`;
+  const prompt = `You are formatting staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas. Rewrite these raw discussion points into clear, professional, concise sentences. Keep all content accurate — do not add or invent anything. Return ONLY a numbered list, nothing else.\n${extra ? 'Additional instructions: ' + extra + '\n' : ''}Raw notes:\n${points.map((p, i) => `${i + 1}. ${p}`).join('\n')}`;
 
   let cleaned = points;
   try {
-    const GEMINI_KEY = 'AIzaSyAuW4rZflM_fXSHCIY1t_STZRhXNp7G-IA';
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
-      {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          contents:[{parts:[{text:prompt}]}],
-          generationConfig:{maxOutputTokens:1000,temperature:0.3}
-        })
-      }
-    );
+    const res = await fetch(GEMINI_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { maxOutputTokens: 1000, temperature: 0.3 }
+      })
+    });
     const data = await res.json();
     const geminiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (geminiText) {
-      cleaned = geminiText.trim().split('\n')
-        .filter(l=>l.trim())
-        .map(l=>l.replace(/^\d+[\.\)\s]*/,'').trim())
-        .filter(l=>l);
-      dot.className='sdot ok'; stxt.textContent='✓ AI polish applied';
+      const lines = geminiText.trim().split('\n')
+        .filter(l => l.trim())
+        .map(l => l.replace(/^\d+[\.\)]\s*/, '').replace(/^\*+\s*/, '').trim())
+        .filter(l => l.length > 0);
+      if (lines.length > 0) {
+        cleaned = lines;
+        dot.className = 'sdot ok';
+        stxt.textContent = '✓ Gemini polish applied';
+      } else {
+        dot.className = 'sdot err';
+        stxt.textContent = 'Using your notes as-is';
+      }
+    } else {
+      dot.className = 'sdot err';
+      stxt.textContent = 'Gemini error — using your notes as-is';
+      console.error('Gemini response:', JSON.stringify(data));
     }
-  } catch(e) { dot.className='sdot'; stxt.textContent='Using your notes as-is'; }
+  } catch(e) {
+    dot.className = 'sdot err';
+    stxt.textContent = 'Network error — using your notes as-is';
+    console.error(e);
+  }
 
-  buildTable(d, cleaned);
-  btn.innerHTML='✨ Generate Minutes';
-  btn.disabled=false;
+  buildTable(getData(), cleaned);
+  btn.innerHTML = '✨ Generate Minutes';
+  btn.disabled = false;
   goToStep(4);
 }
 
+// ── BUILD MINUTES TABLE ───────────────────────────────────────────────────────
 function buildTable(d, pts) {
-  const rows = pts.map(p=>`<li>${esc(p)}</li>`).join('');
+  const attText = attendees.length ? attendees.join(', ') : '—';
+  const rows = pts.map(p => `<li>${esc(p)}</li>`).join('');
+
   document.getElementById('minTable').innerHTML = `
     <tr class="sec-row"><td colspan="2">RSS Staff Meeting</td></tr>
     <tr><td class="lbl">Date</td><td>${fmt(d.date)}</td></tr>
-    <tr><td class="lbl">Time</td><td>${d.start}${d.end?' – '+d.end:''}</td></tr>
-    <tr><td class="lbl">Location</td><td>${esc(d.location)}</td></tr>
-    <tr><td class="lbl">Facilitator</td><td>${esc(d.facilitator)}</td></tr>
-    <tr><td class="lbl">Attendees</td><td>${esc(d.attendees)}</td></tr>
+    <tr><td class="lbl">Time</td><td>${d.start || ''}${d.end ? ' – ' + d.end : ''}</td></tr>
+    <tr><td class="lbl">Location</td><td>${LOCATION}</td></tr>
+    <tr><td class="lbl">Facilitator</td><td>${FACILITATOR}</td></tr>
+    <tr><td class="lbl">Attendees</td><td>${esc(attText)}</td></tr>
     <tr class="sec-row"><td colspan="2">Points of Interest This Week</td></tr>
     <tr><td class="disc-lbl">Discussion</td><td><ol>${rows}</ol></td></tr>
-    <tr><td colspan="2" style="height:6px;background:var(--teal-pale)"></td></tr>
+    <tr><td colspan="2" style="height:6px;background:#e8f4f8;border:1px solid #b8d8e6"></td></tr>
     <tr><td class="next-lbl">Next Meeting</td><td>${fmt(d.nextDate)}</td></tr>`;
 
   plainText = [
     'RSS/CCMS WEEKLY MEETING MINUTES',
     'ETCADA — Part of the Solution',
-    '',`Date: ${fmt(d.date)}`,
-    `Time: ${d.start}${d.end?' – '+d.end:''}`,
-    `Location: ${d.location}`,
-    `Facilitator: ${d.facilitator}`,
-    `Attendees: ${d.attendees}`,
-    '','POINTS OF INTEREST THIS WEEK','Discussion:',
-    ...pts.map((p,i)=>`  ${i+1}. ${p}`),
-    '',`Date of Next Meeting: ${fmt(d.nextDate)}`
+    '',
+    `Date: ${fmt(d.date)}`,
+    `Time: ${d.start || ''}${d.end ? ' – ' + d.end : ''}`,
+    `Location: ${LOCATION}`,
+    `Facilitator: ${FACILITATOR}`,
+    `Attendees: ${attText}`,
+    '',
+    'POINTS OF INTEREST THIS WEEK',
+    'Discussion:',
+    ...pts.map((p, i) => `  ${i + 1}. ${p}`),
+    '',
+    `Date of Next Meeting: ${fmt(d.nextDate)}`
   ].join('\n');
 }
 
+// ── ACTIONS ───────────────────────────────────────────────────────────────────
 function copyMinutes() {
   navigator.clipboard.writeText(plainText)
-    .then(()=>showToast('Copied ✓'))
-    .catch(()=>{
-      const ta=document.createElement('textarea');
-      ta.value=plainText; document.body.appendChild(ta);
-      ta.select(); document.execCommand('copy');
-      document.body.removeChild(ta); showToast('Copied ✓');
+    .then(() => showToast('Copied to clipboard ✓'))
+    .catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = plainText;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Copied ✓');
     });
 }
 
 function printMinutes() {
   const d = getData();
-  const w = window.open('','_blank');
-  const html = document.getElementById('minTable').outerHTML
-    .replace(/var\(--teal\)/g,'#2B8BAE')
-    .replace(/var\(--teal-dark\)/g,'#1d6e8a')
-    .replace(/var\(--teal-pale\)/g,'#e8f4f8')
-    .replace(/var\(--teal-mid\)/g,'#b8d8e6')
-    .replace(/var\(--text-muted\)/g,'#5a7a86');
-  w.document.write(`<html><head><title>Minutes ${fmt(d.date)}</title>
-    <style>body{font-family:Arial,sans-serif;font-size:13px;margin:28px;color:#1a2e36}
-    h2{color:#155570;font-size:17px;margin-bottom:2px}
-    h4{color:#5a7a86;font-size:11px;font-weight:normal;letter-spacing:.07em;text-transform:uppercase;margin-bottom:16px}
+  const w = window.open('', '_blank');
+  const tableHTML = document.getElementById('minTable').outerHTML
+    .replace(/var\(--teal-pale\)/g, '#e8f4f8')
+    .replace(/var\(--teal-mid\)/g, '#b8d8e6')
+    .replace(/var\(--teal-dark\)/g, '#1d6e8a')
+    .replace(/var\(--teal\)/g, '#2B8BAE')
+    .replace(/var\(--text-muted\)/g, '#5a7a86');
+  w.document.write(`<!DOCTYPE html><html><head><title>Meeting Minutes – ${fmt(d.date)}</title>
+  <style>
+    body{font-family:Arial,sans-serif;font-size:13px;margin:30px;color:#1a2e36}
+    h2{color:#155570;font-size:18px;margin-bottom:3px}
+    h4{color:#5a7a86;font-size:11px;font-weight:normal;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px}
     table{width:100%;border-collapse:collapse}
     td{border:1px solid #b8d8e6;padding:7px 10px;vertical-align:top}
-    .sec-row td{background:#1d6e8a;color:white;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-    .lbl{background:#2B8BAE;color:white;font-weight:700;width:28%}
-    .disc-lbl{background:#e8f4f8;color:#1d6e8a;font-weight:700}
-    .next-lbl{background:#e8f4f8;color:#5a7a86}
-    ol{margin:0;padding-left:17px;line-height:1.75}
-    @media print{body{margin:16px}}</style></head>
-    <body><h2>RSS/CCMS Weekly Meeting Minutes</h2>
-    <h4>ETCADA — Part of the Solution</h4>${html}</body></html>`);
-  w.document.close(); w.print();
+    .sec-row td{background:#1d6e8a;color:white;font-weight:bold;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    .lbl{background:#2B8BAE;color:white;font-weight:bold;width:28%}
+    .disc-lbl{background:#e8f4f8 !important;color:#1d6e8a !important;font-weight:bold}
+    .next-lbl{background:#e8f4f8 !important;color:#5a7a86 !important}
+    ol{margin:0;padding-left:18px;line-height:1.8}
+    @media print{body{margin:16px}}
+  </style></head>
+  <body>
+    <h2>RSS/CCMS Weekly Meeting Minutes</h2>
+    <h4>ETCADA — Part of the Solution</h4>
+    ${tableHTML}
+  </body></html>`);
+  w.document.close();
+  w.print();
 }
 
 function emailMinutes() {
   const d = getData();
-  window.open(`mailto:?subject=${encodeURIComponent('Meeting Minutes – '+fmt(d.date))}&body=${encodeURIComponent(plainText)}`);
+  const subject = encodeURIComponent(`Meeting Minutes – ${fmt(d.date)}`);
+  const body = encodeURIComponent(plainText);
+  window.open(`mailto:?subject=${subject}&body=${body}`);
 }
 
+// ── UTILS ─────────────────────────────────────────────────────────────────────
 function getData() {
   return {
-    date: document.getElementById('meetDate').value,
-    start: document.getElementById('startTime').value||'',
-    end: document.getElementById('endTime').value||'',
-    location: document.getElementById('location').value||'',
-    facilitator: document.getElementById('facilitator').value||'',
-    attendees: document.getElementById('attendees').value||'',
+    date:     document.getElementById('meetDate').value,
+    start:    document.getElementById('startTime').value || '',
+    end:      document.getElementById('endTime').value || '',
     nextDate: document.getElementById('nextMeeting').value
   };
 }
 
 function fmt(s) {
-  if (!s) return '';
-  const d = new Date(s+'T12:00:00');
-  return d.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'2-digit'});
+  if (!s) return '—';
+  const d = new Date(s + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' });
 }
-function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function esc(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function showToast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2100);
-}
-function resetAll() {
-  points=[]; currentTranscript=''; plainText='';
-  renderPoints();
-  document.getElementById('manualPoint').value='';
-  document.getElementById('aiInstr').value='';
-  document.getElementById('liveBox').textContent='Tap mic to start...';
-  document.getElementById('liveBox').className='live-box';
-  document.getElementById('addVoiceBtn').classList.remove('show');
-  document.getElementById('statusBar').classList.remove('show');
-  if (isListening) stopListening();
-  goToStep(1);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
 </script>
 </body>
