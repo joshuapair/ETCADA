@@ -36,7 +36,6 @@ input[type=text],input[type=date],textarea{width:100%;border:2px solid var(--mid
 input:focus,textarea:focus{border-color:var(--teal);background:#fff}
 textarea{resize:vertical;line-height:1.5}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
 .locked{width:100%;border:2px solid var(--mid);border-radius:9px;padding:10px 12px;font-family:'Source Sans 3',sans-serif;font-size:15px;color:var(--td);background:var(--pale);font-weight:600;display:flex;align-items:center;gap:8px}
 
 /* ATTENDEES */
@@ -58,12 +57,12 @@ textarea{resize:vertical;line-height:1.5}
 .tip-icon{font-size:22px;flex-shrink:0;margin-top:1px}
 .tip-text{font-size:13px;color:var(--td);line-height:1.6}
 .tip-text strong{display:block;font-weight:700;margin-bottom:2px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
-.notes-area{width:100%;border:none;padding:14px;font-family:'Source Sans 3',sans-serif;font-size:16px;color:var(--tx);background:var(--w);outline:none;line-height:1.6;min-height:120px;resize:none}
+.notes-area{width:100%;border:none;padding:14px;font-family:'Source Sans 3',sans-serif;font-size:16px;color:var(--tx);background:var(--w);outline:none;line-height:1.6;min-height:120px;resize:none;display:block}
 .add-btn{width:100%;background:var(--teal);color:#fff;border:none;border-top:2px solid var(--td);padding:14px;font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s}
 .add-btn:active{background:var(--td)}
 .add-btn:disabled{background:#9bb8c4;pointer-events:none}
 
-/* POINTS */
+/* POINTS LIST */
 .pts{list-style:none}
 .pt{display:flex;align-items:flex-start;gap:8px;padding:10px 0;border-bottom:1px solid var(--pale);animation:fi .2s ease}
 .pt:last-child{border-bottom:none}
@@ -72,6 +71,19 @@ textarea{resize:vertical;line-height:1.5}
 .pdel{background:none;border:none;color:#ccc;font-size:18px;cursor:pointer;padding:0 3px;flex-shrink:0}
 .pdel:active{color:var(--red)}
 .empty-msg{text-align:center;padding:18px 0 8px;font-size:13px;color:var(--mu);font-style:italic}
+
+/* EDITABLE POINTS IN REVIEW */
+.edit-pt{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--pale)}
+.edit-pt:last-child{border-bottom:none}
+.edit-num{background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:6px}
+.edit-input{flex:1;border:2px solid var(--mid);border-radius:8px;padding:7px 10px;font-family:'Source Sans 3',sans-serif;font-size:14px;color:var(--tx);background:var(--off);outline:none;line-height:1.4;resize:none;min-height:38px}
+.edit-input:focus{border-color:var(--teal);background:#fff}
+.edit-del{background:none;border:none;color:#ccc;font-size:18px;cursor:pointer;padding:0 3px;flex-shrink:0;margin-top:6px}
+.edit-del:active{color:var(--red)}
+.add-pt-row{display:flex;gap:8px;margin-top:10px}
+.add-pt-row input{flex:1}
+.add-pt-btn{background:var(--teal);color:#fff;border:none;border-radius:9px;padding:0 14px;font-size:20px;cursor:pointer;flex-shrink:0}
+.add-pt-btn:active{background:var(--td)}
 
 /* NAV */
 .nav{display:flex;gap:10px;margin:14px 14px 0}
@@ -82,19 +94,6 @@ textarea{resize:vertical;line-height:1.5}
 .nb.next:active{background:var(--td)}
 .nb.gen{background:var(--tp);color:#fff;box-shadow:0 3px 14px rgba(21,85,112,.35)}
 .nb.gen:active{opacity:.88}
-
-/* STATUS */
-.sbar{background:var(--pale);border:1px solid var(--mid);border-radius:9px;padding:9px 12px;font-size:13px;color:var(--td);margin:10px 14px 0;display:none;align-items:center;gap:8px}
-.sbar.show{display:flex}
-.sdot{width:9px;height:9px;border-radius:50%;background:var(--teal);flex-shrink:0}
-.sdot.spin{background:#f4a261;animation:blink .8s ease infinite alternate}
-.sdot.ok{background:var(--gr)}
-.sdot.err{background:var(--red)}
-@keyframes blink{from{opacity:.3}to{opacity:1}}
-
-/* REVIEW */
-.rev{font-size:14px;line-height:1.8;color:var(--tx)}
-.rev b{color:var(--td)}
 
 /* MINUTES */
 .pbox{background:var(--w);border:2px solid var(--mid);border-radius:var(--r);margin:14px 14px 0;overflow:hidden}
@@ -135,11 +134,11 @@ textarea{resize:vertical;line-height:1.5}
 <div class="steps">
   <div class="step active" id="t1" onclick="goToStep(1)"><span class="n">1</span>Info</div>
   <div class="step" id="t2" onclick="goToStep(2)"><span class="n">2</span>Notes</div>
-  <div class="step" id="t3" onclick="goToStep(3)"><span class="n">3</span>Review</div>
+  <div class="step" id="t3" onclick="goToStep(3)"><span class="n">3</span>Review & Edit</div>
   <div class="step" id="t4" onclick="goToStep(4)"><span class="n">4</span>Minutes</div>
 </div>
 
-<!-- ══ STEP 1 ══ -->
+<!-- ══ STEP 1: INFO ══ -->
 <div class="page active" id="p1">
   <div class="card">
     <div class="ch">📋 Meeting Details</div>
@@ -182,23 +181,22 @@ textarea{resize:vertical;line-height:1.5}
   <div class="pad"></div>
 </div>
 
-<!-- ══ STEP 2 ══ -->
+<!-- ══ STEP 2: NOTES ══ -->
 <div class="page" id="p2">
-
   <div class="notes-card">
     <div class="tip-box">
       <div class="tip-icon">🎤</div>
       <div class="tip-text">
         <strong>How to use voice on your phone</strong>
-        Tap the text area below — your keyboard opens. Look for the <b>🎤 microphone key</b> on your keyboard and tap it to dictate. Speak your notes, tap the mic again to stop. Then tap <b>Add Notes</b> — Gemini will clean and split them automatically.
+        Tap the text area below — your keyboard opens. Look for the <b>🎤 microphone key</b> on your keyboard and tap it to dictate. Speak your notes, tap mic again to stop. Then tap <b>Add Notes</b> — Gemini will clean and split them automatically.
       </div>
     </div>
-    <textarea class="notes-area" id="noteInput" placeholder="Tap here, then use the 🎤 key on your keyboard to speak your notes — or just type them. You can speak everything at once."></textarea>
+    <textarea class="notes-area" id="noteInput" placeholder="Tap here, then use the 🎤 key on your keyboard to speak — or just type. You can say everything at once."></textarea>
     <button class="add-btn" id="addBtn" onclick="addNotes()">✨ Add Notes — Gemini Will Clean Up</button>
   </div>
 
   <div class="card">
-    <div class="ch">📝 Discussion Points <span id="ptCount" style="opacity:.75;font-weight:400">0</span></div>
+    <div class="ch">📝 Points Added <span id="ptCount" style="opacity:.75;font-weight:400">0</span></div>
     <div class="cb">
       <ul class="pts" id="ptList"><li class="empty-msg">No points yet — add your notes above.</li></ul>
     </div>
@@ -206,34 +204,41 @@ textarea{resize:vertical;line-height:1.5}
 
   <div class="nav">
     <button class="nb back" onclick="goToStep(1)">← Back</button>
-    <button class="nb next" onclick="goToStep(3)">Review →</button>
+    <button class="nb next" onclick="goToStep(3)">Review & Edit →</button>
   </div>
   <div class="pad"></div>
 </div>
 
-<!-- ══ STEP 3 ══ -->
+<!-- ══ STEP 3: REVIEW & EDIT ══ -->
 <div class="page" id="p3">
+
+  <!-- Meeting info summary (read-only) -->
   <div class="card">
-    <div class="ch">👁 Review</div>
-    <div class="cb rev" id="revBody"></div>
+    <div class="ch">📋 Meeting Info</div>
+    <div class="cb" id="infoSummary" style="font-size:14px;line-height:1.8;color:var(--tx)"></div>
   </div>
+
+  <!-- Editable discussion points -->
   <div class="card">
-    <div class="ch">✨ Final Polish</div>
+    <div class="ch">✏️ Edit Discussion Points</div>
     <div class="cb">
-      <p style="font-size:13px;color:var(--mu);margin-bottom:10px;line-height:1.5">Gemini does one final cleanup before formatting your minutes.</p>
-      <label>Extra Instructions (optional)</label>
-      <textarea id="aiInstr" placeholder="e.g. Note any action items. Keep it brief." style="min-height:56px"></textarea>
+      <p style="font-size:12px;color:var(--mu);margin-bottom:12px">Tap any point to edit it. Tap ✕ to delete. Add more below.</p>
+      <div id="editList"></div>
+      <div class="add-pt-row">
+        <input type="text" id="newPtInput" placeholder="Add another point..." onkeydown="if(event.key==='Enter')addNewPt()">
+        <button class="add-pt-btn" onclick="addNewPt()">+</button>
+      </div>
     </div>
   </div>
-  <div class="sbar" id="sbar"><div class="sdot" id="sdot"></div><span id="stxt"></span></div>
+
   <div class="nav">
     <button class="nb back" onclick="goToStep(2)">← Back</button>
-    <button class="nb gen" id="genBtn" onclick="generate()">✨ Generate Minutes</button>
+    <button class="nb gen" onclick="buildMinutes()">Format Minutes →</button>
   </div>
   <div class="pad"></div>
 </div>
 
-<!-- ══ STEP 4 ══ -->
+<!-- ══ STEP 4: MINUTES ══ -->
 <div class="page" id="p4">
   <div class="pbox">
     <div class="phead">RSS/CCMS Weekly Meeting Minutes<span>ETCADA — Part of the Solution</span></div>
@@ -254,7 +259,7 @@ textarea{resize:vertical;line-height:1.5}
 <script>
 const FAC  = 'Brett Foster, RSPS, PSS';
 const LOC  = 'ETCADA';
-const GKEY = 'AIzaSyBstMupBPqWM8IcSWksMisDZxrotGr8zF0';
+const GKEY = 'YOUR_GEMINI_API_KEY_HERE';
 const GURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GKEY}`;
 
 let points    = [];
@@ -271,10 +276,8 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── GEMINI ────────────────────────────────────────────────────────────────────
-async function callGemini(text, extra) {
-  if (GKEY === 'YOUR_GEMINI_API_KEY_HERE') {
-    throw new Error('API key not set — replace YOUR_GEMINI_API_KEY_HERE in the code');
-  }
+async function callGemini(text) {
+  if (GKEY === 'AIzaSyBstMupBPqWM8IcSWksMisDZxrotGr8zF0') throw new Error('API key not set');
   const prompt = `You are formatting staff meeting minutes for ETCADA, a behavioral health nonprofit in Texas.
 
 The text below is raw voice or typed notes from a staff meeting. Do the following:
@@ -283,7 +286,6 @@ The text below is raw voice or typed notes from a staff meeting. Do the followin
 3. Remove filler words (um, uh, you know, like, so, etc.)
 4. Do NOT add or invent anything not in the original
 5. Return ONLY a numbered list. One point per line. No markdown. No intro text.
-${extra ? '\nExtra instructions: ' + extra : ''}
 
 Notes:
 "${text}"`;
@@ -324,8 +326,7 @@ function newMeeting() {
   document.getElementById('meetDate').value = today;
   const nxt = new Date(); nxt.setDate(nxt.getDate()+7);
   document.getElementById('nextDate').value = nxt.toISOString().split('T')[0];
-  ['startTime','endTime','noteInput','aiInstr'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('sbar').classList.remove('show');
+  ['startTime','endTime','noteInput'].forEach(id => document.getElementById(id).value = '');
   const btn = document.getElementById('addBtn');
   btn.innerHTML = '✨ Add Notes — Gemini Will Clean Up';
   btn.disabled = false;
@@ -375,7 +376,7 @@ async function addNotes() {
   btn.disabled = true;
 
   try {
-    const cleaned = await callGemini(raw, '');
+    const cleaned = await callGemini(raw);
     if (cleaned.length > 0) {
       cleaned.forEach(p => points.push(p));
       renderPts();
@@ -385,10 +386,14 @@ async function addNotes() {
       points.push(raw);
       renderPts();
       ta.value = '';
-      showToast('Added as-is — Gemini returned empty');
+      showToast('Added as-is');
     }
   } catch(e) {
-    showToast('Error: ' + e.message.substring(0, 60));
+    // Add raw as fallback so nothing is lost
+    points.push(raw);
+    renderPts();
+    ta.value = '';
+    showToast('Gemini unavailable — added as-is');
     console.error(e);
   }
 
@@ -410,54 +415,65 @@ function renderPts() {
     </li>`).join('');
 }
 
-// ── REVIEW ────────────────────────────────────────────────────────────────────
+// ── REVIEW: sync editable fields → points array ───────────────────────────────
+function syncEdits() {
+  const inputs = document.querySelectorAll('.edit-input');
+  points = Array.from(inputs).map(inp => inp.value.trim()).filter(v => v.length > 0);
+}
+
 function buildReview() {
+  // Info summary
   const d = getData();
-  document.getElementById('revBody').innerHTML = `
+  document.getElementById('infoSummary').innerHTML = `
     <b>Date:</b> ${fmt(d.date)}<br>
     <b>Time:</b> ${d.start||'—'}${d.end?' – '+d.end:''}<br>
     <b>Location:</b> ${LOC}<br>
     <b>Facilitator:</b> ${FAC}<br>
     <b>Attendees:</b> ${attendees.length ? esc(attendees.join(', ')) : '—'}<br>
-    <b>Next Meeting:</b> ${fmt(d.nextDate)}<br><br>
-    <b>${points.length} Discussion Point${points.length!==1?'s':''}:</b><br>
-    ${points.map((p,i)=>`${i+1}. ${esc(p)}`).join('<br>')}`;
+    <b>Next Meeting:</b> ${fmt(d.nextDate)}`;
+
+  // Editable points
+  renderEditList();
 }
 
-// ── GENERATE ──────────────────────────────────────────────────────────────────
-async function generate() {
-  if (!points.length) { showToast('Add at least one point first'); return; }
-  const btn  = document.getElementById('genBtn');
-  const sb   = document.getElementById('sbar');
-  const dot  = document.getElementById('sdot');
-  const stxt = document.getElementById('stxt');
-  btn.innerHTML = '<span class="spin"></span> Generating...';
-  btn.disabled = true;
-  sb.classList.add('show');
-  dot.className = 'sdot spin';
-  stxt.textContent = 'Gemini doing final polish...';
-
-  const extra = document.getElementById('aiInstr').value.trim();
-  let final = points;
-  try {
-    const cleaned = await callGemini(points.map((p,i)=>`${i+1}. ${p}`).join('\n'), extra);
-    if (cleaned.length > 0) {
-      final = cleaned;
-      dot.className = 'sdot ok';
-      stxt.textContent = '✓ Final polish applied';
-    } else {
-      dot.className = 'sdot err';
-      stxt.textContent = 'Using current points (Gemini returned empty)';
-    }
-  } catch(e) {
-    dot.className = 'sdot err';
-    stxt.textContent = 'Error: ' + e.message.substring(0,50);
-    console.error(e);
+function renderEditList() {
+  const el = document.getElementById('editList');
+  if (!points.length) {
+    el.innerHTML = '<p style="font-size:13px;color:var(--mu);font-style:italic;padding:6px 0">No points yet. Go back and add notes.</p>';
+    return;
   }
+  el.innerHTML = points.map((p,i) => `
+    <div class="edit-pt">
+      <span class="edit-num">${i+1}</span>
+      <textarea class="edit-input" rows="2" onchange="syncEdits()">${esc(p)}</textarea>
+      <button class="edit-del" onclick="deleteEditPt(${i})">✕</button>
+    </div>`).join('');
+}
 
-  buildTable(getData(), final);
-  btn.innerHTML = '✨ Generate Minutes';
-  btn.disabled = false;
+function deleteEditPt(i) {
+  syncEdits();
+  points.splice(i,1);
+  renderEditList();
+  showToast('Point removed');
+}
+
+function addNewPt() {
+  const inp = document.getElementById('newPtInput');
+  const val = inp.value.trim();
+  if (!val) return;
+  syncEdits();
+  points.push(val);
+  inp.value = '';
+  renderEditList();
+  renderPts();
+  showToast('Point added ✓');
+}
+
+// ── BUILD MINUTES (no AI, straight from edited points) ────────────────────────
+function buildMinutes() {
+  syncEdits();
+  if (!points.length) { showToast('Add at least one point first'); return; }
+  buildTable(getData(), points);
   goToStep(4);
 }
 
