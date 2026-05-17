@@ -131,6 +131,8 @@ textarea{resize:vertical;line-height:1.5}
   <button class="hbtn" onclick="newMeeting()">+ New Meeting</button>
 </header>
 
+<div id="keyStatus" style="display:none;padding:10px 14px;font-size:13px;font-weight:600;border-bottom:2px solid #ccc;"></div>
+<div id="geminiErr" style="display:none;padding:10px 14px;font-size:13px;font-weight:600;background:#fde8e8;color:#a00;border-bottom:2px solid #e99;"></div>
 <div class="steps">
   <div class="step active" id="t1" onclick="goToStep(1)"><span class="n">1</span>Info</div>
   <div class="step" id="t2" onclick="goToStep(2)"><span class="n">2</span>Notes</div>
@@ -259,7 +261,7 @@ textarea{resize:vertical;line-height:1.5}
 <script>
 const FAC  = 'Brett Foster, RSPS, PSS';
 const LOC  = 'ETCADA';
-const GKEY = 'AIzaSyBstMupBPqWM8IcSWksMisDZxrotGr8zF0';
+const GKEY = 'YOUR_GEMINI_API_KEY_HERE';
 const GURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GKEY}`;
 
 let points    = [];
@@ -273,11 +275,56 @@ window.addEventListener('DOMContentLoaded', () => {
   const nxt = new Date(); nxt.setDate(nxt.getDate() + 7);
   document.getElementById('nextDate').value = nxt.toISOString().split('T')[0];
   loadAtts();
+  testKey();
 });
+
+async function testKey() {
+  const el = document.getElementById('keyStatus');
+  if (GKEY === 'AIzaSyBstMupBPqWM8IcSWksMisDZxrotGr8zF0') {
+    el.textContent = '⚠️ API key not set — replace YOUR_GEMINI_API_KEY_HERE in the code';
+    el.style.background = '#fff3cd';
+    el.style.color = '#856404';
+    el.style.display = 'block';
+    return;
+  }
+  try {
+    const r = await fetch(GURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: 'Reply with one word: ready' }] }],
+        generationConfig: { maxOutputTokens: 5 }
+      })
+    });
+    const d = await r.json();
+    if (d.error) {
+      el.textContent = '❌ Gemini error: ' + d.error.message;
+      el.style.background = '#fde8e8';
+      el.style.color = '#a00';
+      el.style.display = 'block';
+    } else if (d.candidates?.[0]?.content?.parts?.[0]?.text) {
+      el.textContent = '✅ Gemini connected';
+      el.style.background = '#e8f8f0';
+      el.style.color = '#1a6b5a';
+      el.style.display = 'block';
+      setTimeout(() => el.style.display = 'none', 3000);
+    } else {
+      el.textContent = '⚠️ Gemini responded but returned no text: ' + JSON.stringify(d);
+      el.style.background = '#fff3cd';
+      el.style.color = '#856404';
+      el.style.display = 'block';
+    }
+  } catch(e) {
+    el.textContent = '❌ Cannot reach Gemini: ' + e.message;
+    el.style.background = '#fde8e8';
+    el.style.color = '#a00';
+    el.style.display = 'block';
+  }
+}
 
 // ── GEMINI ────────────────────────────────────────────────────────────────────
 async function callGemini(text) {
-  if (GKEY === 'AIzaSyBstMupBPqWM8IcSWksMisDZxrotGr8zF0') throw new Error('API key not set');
+  if (GKEY === 'YOUR_GEMINI_API_KEY_HERE') throw new Error('API key not set');
 
   // Strip dialogue formatting — remove "Name: " prefixes, collapse whitespace
   const cleaned = text
@@ -404,8 +451,12 @@ async function addNotes() {
     points.push(raw);
     renderPts();
     ta.value = '';
-    showToast('Gemini unavailable — added as-is');
-    console.error(e);
+    const msg = e.message || 'Unknown error';
+    showToast('Error: ' + msg.substring(0, 80));
+    // Show full error in a visible alert so user can see what happened
+    document.getElementById('geminiErr').textContent = '❌ Gemini error: ' + msg;
+    document.getElementById('geminiErr').style.display = 'block';
+    console.error('Full Gemini error:', e);
   }
 
   btn.innerHTML = '✨ Add Notes — Gemini Will Clean Up';
